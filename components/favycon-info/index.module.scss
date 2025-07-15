@@ -1,4 +1,6 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables' as *;
+@use '../../styles/breakpoints' as *;
+@use 'sass:color';
 
 .root {
 	position: relative;
@@ -112,10 +114,7 @@
 
 .overlay {
 	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+	inset: 0;
 	z-index: 10;
 	background-color: rgba($light-grey, 0.64);
 }
@@ -282,7 +281,7 @@
 		color: #55acee;
 
 		&:hover {
-			color: darken(#55acee, 15);
+			color: color.adjust(#55acee, $lightness: -15%);
 		}
 	}
 
@@ -297,7 +296,7 @@
 			color: $black;
 
 			&:hover {
-				color: darken($black, 15);
+				color: color.adjust($black, $lightness: -15%);
 			}
 		}
 

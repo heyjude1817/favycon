@@ -146,14 +146,7 @@ const FavyconInfo = ({
 							{people.map((person) => (
 								<div key={person.screenName} className={styles.person}>
 									<div className={styles.personAvatar}>
-										<Image
-											src={person.photo}
-											alt={person.name}
-											width={56}
-											height={56}
-											placeholder="blur"
-											layout="intrinsic"
-										/>
+										<Image src={person.photo} alt={person.name} width={56} height={56} placeholder="blur" />
 									</div>
 									<div>
 										<Typography variant="largeBody" weight="semiBold">

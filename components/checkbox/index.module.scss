@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables' as *;
 
 .root {
 	position: relative;
@@ -8,10 +8,10 @@
 .checkbox {
 	margin: 0;
 	overflow: hidden;
+	appearance: none;
 	cursor: pointer;
 	visibility: hidden;
 	outline: none;
-	appearance: none;
 	-webkit-tap-highlight-color: transparent;
 }
 

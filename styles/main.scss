@@ -1,8 +1,8 @@
-@import 'reset';
-@import 'font';
-@import 'variables';
-@import 'nprogress';
-@import 'prism';
+@use 'reset';
+@use 'font';
+@use 'variables' as *;
+@use 'nprogress';
+@use 'prism';
 
 html,
 body {

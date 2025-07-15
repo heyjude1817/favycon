@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 /* Make clicks pass-through */
 #nprogress {
 	pointer-events: none;

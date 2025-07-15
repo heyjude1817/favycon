@@ -1,9 +1,8 @@
 import React, { createContext, useContext, useMemo } from 'react'
 import { useMedia } from 'react-use'
-import PropTypes from 'prop-types'
 
 type MediaQueryProviderProps = {
-	children: PropTypes.ReactNodeLike
+	children: React.ReactNode
 	isMobileDevice?: boolean
 }
 type ContextProps = {
@@ -17,11 +16,6 @@ export const MediaQueryProvider = ({ children, isMobileDevice = false }: MediaQu
 	const value = useMemo(() => ({ isMobile }), [isMobile])
 
 	return <MediaQueryContext.Provider value={value}>{children}</MediaQueryContext.Provider>
-}
-
-MediaQueryProvider.propTypes = {
-	children: PropTypes.node.isRequired,
-	isMobileDevice: PropTypes.bool,
 }
 
 export const useMediaQueryContext = () => useContext(MediaQueryContext)

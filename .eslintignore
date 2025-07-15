@@ -1,3 +1,2 @@
-node_modules
-.next
-storybook-static
+cypress.config.ts
+cypress/**/*

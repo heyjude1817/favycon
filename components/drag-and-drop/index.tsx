@@ -33,7 +33,6 @@ import { useMediaQueryContext } from 'components/media-query-provider'
 import styles from './index.module.scss'
 
 const Modal = dynamic(() => import('react-modal'))
-const Clipboard = dynamic(() => import('react-clipboard.js'))
 
 export type DragAndDropProps = {
 	onFile: (hasFile: boolean) => void
@@ -215,12 +214,17 @@ const DragAndDrop = ({ onFile, onGenerate, onError }: DragAndDropProps) => {
 		multiple: false,
 	})
 
-	const onCopy = () => {
-		setCopied(true)
-		setTimeout(() => {
-			setCopied(false)
-		}, 3000)
-		splitbee.track('Code copied')
+	const onCopy = async () => {
+		try {
+			await navigator.clipboard.writeText(headTemplate(undefined, isSvg, pwa))
+			setCopied(true)
+			setTimeout(() => {
+				setCopied(false)
+			}, 3000)
+			splitbee.track('Code copied')
+		} catch (err) {
+			console.error('Failed to copy text: ', err)
+		}
 	}
 
 	const [isHover, setIsHover] = useState(false)
@@ -505,26 +509,22 @@ const DragAndDrop = ({ onFile, onGenerate, onError }: DragAndDropProps) => {
 							<Typography variant="title" weight="bold">
 								Insert the following code in the &lt;head&gt; section of your pages:
 							</Typography>
-							<Clipboard component="div" data-clipboard-text={headTemplate(undefined, isSvg, pwa)} onSuccess={onCopy}>
-								<div className={classnames(styles.copyWrapper, { [styles.copied]: copied })}>
-									<Button color="white" background="bgLink">
-										Copy code
-									</Button>
-								</div>
-							</Clipboard>
+							<div className={classnames(styles.copyWrapper, { [styles.copied]: copied })}>
+								<Button color="white" background="bgLink" onClick={onCopy}>
+									Copy code
+								</Button>
+							</div>
 						</div>
 						<div className={styles.modalCode}>
 							<Typography variant="title" weight="bold" color="white" colorImmutable className={styles.modalCodeTitle}>
 								Insert the following code in the &lt;head&gt; section of your pages:
 							</Typography>
 							<CodeHighlight ref={modalBodyRef} template={headTemplate(undefined, isSvg, pwa)} />
-							<Clipboard component="div" data-clipboard-text={headTemplate(undefined, isSvg, pwa)} onSuccess={onCopy}>
-								<div className={classnames(styles.copyWrapper)}>
-									<Button color="white" background="bgLink">
-										{copied ? 'Copied!' : 'Copy code'}
-									</Button>
-								</div>
-							</Clipboard>
+							<div className={classnames(styles.copyWrapper)}>
+								<Button color="white" background="bgLink" onClick={onCopy}>
+									{copied ? 'Copied!' : 'Copy code'}
+								</Button>
+							</div>
 						</div>
 					</div>
 				</Modal>

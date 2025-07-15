@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types'
+import React from 'react'
 
 import styles from './index.module.scss'
 
 type StickyProps = {
-	children: PropTypes.ReactNodeLike
+	children: React.ReactNode
 }
 
 const Sticky = ({ children }: StickyProps) => {

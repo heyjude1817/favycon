@@ -1,4 +1,5 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables' as *;
+@use '../../styles/breakpoints' as *;
 
 .root {
 	position: relative;
@@ -62,10 +63,7 @@
 
 .dashed {
 	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+	inset: 0;
 	z-index: 1;
 	border-radius: 6px;
 
@@ -216,6 +214,7 @@
 		@media (hover: none) and (pointer: coarse) {
 			display: none;
 		}
+
 		@include breakpoint-md {
 			display: none;
 		}
@@ -284,8 +283,8 @@
 		left: -1px;
 		width: 48px;
 		height: 48px;
-		border-radius: 4px;
 		object-fit: contain;
+		border-radius: 4px;
 	}
 }
 
@@ -606,10 +605,7 @@
 
 .overlay {
 	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+	inset: 0;
 	z-index: 10;
 	background-color: rgba($white, 0.64);
 }
@@ -685,6 +681,7 @@
 
 	&::before {
 		z-index: 2;
+
 		@include breakpoint-md {
 			position: absolute;
 			right: -1px;

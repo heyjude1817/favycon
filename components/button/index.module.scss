@@ -1,4 +1,5 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables' as *;
+@use '../../styles/breakpoints' as *;
 
 .base {
 	padding: 5px 12px;

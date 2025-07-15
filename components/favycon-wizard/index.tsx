@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import Image from 'next/image'
 
@@ -10,7 +9,7 @@ import dndLight from '../../public/images/dnd-light.png'
 import dndDark from '../../public/images/dnd-dark.png'
 
 type FavyconWizardProps = {
-	children: PropTypes.ReactNodeLike
+	children: React.ReactNode
 	showDndImage: boolean
 }
 
@@ -31,19 +30,19 @@ const FavyconWizardComponent = ({ children, showDndImage }: FavyconWizardProps) 
 		<div className={styles.root}>
 			<div className={styles.background}>
 				<div className={styles.mobileBackground}>
-					<Image alt="Unsplash image" placeholder="blur" layout="fill" {...unsplashImageProps(true)} />
+					<Image alt="Unsplash image" placeholder="blur" fill {...unsplashImageProps(true)} />
 				</div>
 				<div className={styles.desktopBackground}>
-					<Image alt="Unsplash image" placeholder="blur" layout="intrinsic" {...unsplashImageProps(false)} />
+					<Image alt="Unsplash image" placeholder="blur" {...unsplashImageProps(false)} />
 				</div>
 			</div>
 			{children}
 			<div className={classnames(styles.image, { [styles.hide]: !showDndImage })}>
 				<div className={styles.imageLight}>
-					<Image alt="Drag and drop here!" {...dndImageProps(false)} layout="intrinsic" />
+					<Image alt="Drag and drop here!" {...dndImageProps(false)} />
 				</div>
 				<div className={styles.imageDark}>
-					<Image alt="Drag and drop here!" {...dndImageProps(true)} layout="intrinsic" />
+					<Image alt="Drag and drop here!" {...dndImageProps(true)} />
 				</div>
 			</div>
 		</div>

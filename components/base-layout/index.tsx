@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types'
+import React from 'react'
 import { Header } from 'components/header'
 
 import styles from './index.module.scss'
 
 type BaseLayoutProps = {
-	children: PropTypes.ReactNodeLike
+	children: React.ReactNode
 }
 
 const BaseLayout = ({ children }: BaseLayoutProps) => {

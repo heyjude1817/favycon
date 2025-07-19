@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import classnames from 'classnames'
 import { Typography } from 'components/typography'
 
@@ -19,7 +20,7 @@ const steps: Step[] = [
 		description:
 			"Drag and drop your image file into the upload area, or click to browse and select it from your device. Faviconify supports PNG, SVG, and JPEG formats and ensures fast, secure uploading. Make sure your image is at least 310×310 pixels for optimal results. Once uploaded, you'll be ready to start the favicon generation process in just one click.",
 		image: '/images/step-upload.png',
-		imageAlt: 'Upload your image file',
+		imageAlt: 'Drag and drop interface for uploading images',
 	},
 	{
 		number: '02',
@@ -27,7 +28,7 @@ const steps: Step[] = [
 		description:
 			'After uploading, click "Generate Favicons" to begin the creation process. Our advanced processing engine will intelligently analyze your image and create all standard favicon sizes based on your needs. Processing time may vary depending on the image complexity, but most generations complete within a few moments. Please wait while the system works its magic.',
 		image: '/images/step-generate.png',
-		imageAlt: 'Start favicon generation',
+		imageAlt: 'Favicon generation process in action',
 	},
 	{
 		number: '03',
@@ -35,7 +36,7 @@ const steps: Step[] = [
 		description:
 			"Once the process is complete, you'll be able to download the complete favicon package with all sizes and formats in high quality. Your files will include ICO, PNG formats, and ready-to-use HTML code snippets. You can now use the generated favicons for your website, PWA, or mobile app — all with professional results, completely free. Just start implementing your new favicons now!",
 		image: '/images/step-download.png',
-		imageAlt: 'Download your favicon package',
+		imageAlt: 'Download favicon package with all sizes and formats',
 	},
 ]
 
@@ -82,12 +83,14 @@ const HowItWorks = ({ className }: HowItWorksProps) => {
 								</div>
 								<div className={styles.stepImage}>
 									<div className={styles.imageWrapper}>
-										<div className={styles.imagePlaceholder}>
-											<div className={styles.placeholderIcon}>{index === 0 ? '📁' : index === 1 ? '⚡' : '💻'}</div>
-											<Typography variant="smallBody" weight="medium" className={styles.placeholderText}>
-												{step.imageAlt}
-											</Typography>
-										</div>
+										<Image
+											src={step.image}
+											alt={step.imageAlt}
+											width={500}
+											height={350}
+											className={styles.image}
+											priority={index === 0}
+										/>
 									</div>
 								</div>
 							</div>

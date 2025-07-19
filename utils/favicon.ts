@@ -60,7 +60,7 @@ export const headTemplate = (
 	isPwa ? `\n<link rel="manifest" href="/manifest.json">\n<meta name="theme-color" content="${color}">` : ''
 }`
 
-export const readmeTemplate = (color = '#ffffff', isSvg = false, isPwa = false) => `Thank you for using Favycon!
+export const readmeTemplate = (color = '#ffffff', isSvg = false, isPwa = false) => `Thank you for using Faviconify!
 
 Now that you have all favicon files generator, you can copy all files
 from the icons folder into your project public folder.

@@ -18,7 +18,7 @@ const SEO = ({ title, description }: SEOProps) => (
 		<link rel="apple-touch-icon" sizes="144x144" href="/favicon-144x144.png" />
 		<link rel="apple-touch-icon" sizes="152x152" href="/favicon-152x152.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png" />
-		<meta name="apple-mobile-web-app-title" content="Favycon" />
+		<meta name="apple-mobile-web-app-title" content="Faviconify" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -31,8 +31,8 @@ const SEO = ({ title, description }: SEOProps) => (
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content={title} />
-		<meta property="og:url" content="https://favycon.vercel.app" />
-		<meta property="og:image" content="https://favycon.vercel.app/share.png?v5" />
+		<meta property="og:url" content="https://faviconify.vercel.app" />
+		<meta property="og:image" content="https://faviconify.vercel.app/share.png?v5" />
 		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />

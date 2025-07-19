@@ -1,31 +1,28 @@
 {
 	"name": "favycon",
-	"version": "1.0.0",
-	"description": "A favicon generator tool",
-	"private": true,
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/ruisaraiva19/favycon.git"
-	},
+	"version": "1.0.1",
+	"description": "A favicon generator tool that converts uploaded images into multiple favicon formats and sizes for web applications.",
 	"keywords": [
+		"favicons",
+		"favicon generator",
+		"favicon checker",
+		"favicon downloader",
+		"favicon dimensions",
+		"favicon marker",
+		"favicon size",
+		"favicon tool",
+		"favicon validator",
+		"favicon checker",
 		"favicon",
 		"generator",
 		"tool",
 		"icon",
 		"svg",
 		"png",
-		"pwa"
+		"pwa",
+		"favicon generator"
 	],
-	"author": {
-		"name": "Rui Saraiva",
-		"email": "ruisaraiva19@gmail.com",
-		"url": "https://ruisaraiva.dev/"
-	},
 	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/ruisaraiva19/favycon/issues"
-	},
-	"homepage": "https://github.com/ruisaraiva19/favycon#readme",
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",

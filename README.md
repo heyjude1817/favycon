@@ -1,10 +1,8 @@
-![Favycon logo](./public/favicon.svg)
+![Faviconify logo](./public/favicon.svg)
 
-# Favycon
+# Faviconify
 
-> A favicon generator tool
-
-A small online tool to help you generate your favicon in all the sizes and formats you need.
+> A favicon generator tool that converts uploaded images into multiple favicon formats and sizes for web applications.
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)

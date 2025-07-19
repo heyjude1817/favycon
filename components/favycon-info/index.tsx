@@ -83,17 +83,6 @@ const FavyconInfo = ({
 					add the favicons.
 				</Typography>
 				<hr />
-				<Typography variant="footer" weight="semiBold" color="gray" className={styles.footer}>
-					Created by{' '}
-					<button className={styles.peopleButton} onClick={() => setIsModalOpen(true)}>
-						{people.length} people
-					</button>{' '}
-					on their 2020’s worldwide quarantine. Background image from{' '}
-					<a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">
-						Unsplash
-					</a>
-					.
-				</Typography>
 			</div>
 			<Modal
 				ariaHideApp={false}

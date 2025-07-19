@@ -4,7 +4,7 @@ const SvgFavycon: React.FC<JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElemen
 	const idPrefix = 'svg-favycon-'
 	return (
 		<svg width={64} height={64} viewBox="0 0 64 64" aria-labelledby={`${idPrefix}-title`} {...props}>
-			<title id={`${idPrefix}-title`}>Favycon logo</title>
+			<title id={`${idPrefix}-title`}>Faviconify logo</title>
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"

@@ -12,10 +12,10 @@ const ToolTitle = ({ hideLogo = false, small = false }: ToolTitleProps) => (
 	<div className={styles.root}>
 		{!hideLogo && <SvgFavycon />}
 		<Typography variant={small ? 'h2' : 'h1'} weight="extraBold" color="black">
-			Favycon
+			Faviconify
 		</Typography>
 		<Typography variant="superscript" tag="span" weight="bold" color="gray">
-			APP
+			Tool
 		</Typography>
 	</div>
 )

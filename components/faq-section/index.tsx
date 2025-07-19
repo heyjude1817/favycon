@@ -12,20 +12,22 @@ interface FAQ {
 const faqs: FAQ[] = [
 	{
 		question: 'What image formats are supported?',
-		answer: 'PNG, SVG, and JPEG formats. We recommend square images with minimum 310×310 pixels for best results.'
+		answer: 'PNG, SVG, and JPEG formats. We recommend square images with minimum 310×310 pixels for best results.',
 	},
 	{
 		question: 'Is my data stored anywhere?',
-		answer: 'No, all processing is done in real-time. Your images are never stored on our servers and are deleted immediately after processing.'
+		answer:
+			'No, all processing is done in real-time. Your images are never stored on our servers and are deleted immediately after processing.',
 	},
 	{
 		question: 'What sizes are generated?',
-		answer: 'We generate 16+ standard sizes from 16×16 to 512×512 pixels, including all PWA and mobile app icon sizes, plus ICO format.'
+		answer:
+			'We generate 16+ standard sizes from 16×16 to 512×512 pixels, including all PWA and mobile app icon sizes, plus ICO format.',
 	},
 	{
 		question: 'Is it really free?',
-		answer: 'Yes, completely free with no registration, limits, or hidden costs. No credit card required.'
-	}
+		answer: 'Yes, completely free with no registration, limits, or hidden costs. No credit card required.',
+	},
 ]
 
 interface FAQSectionProps {
@@ -43,20 +45,10 @@ const FAQSection = ({ className }: FAQSectionProps) => {
 		<section id="faq" className={classnames(styles.root, className)}>
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<Typography
-						variant="largeTitle"
-						weight="extraBold"
-						className={styles.title}
-						tag="h2"
-					>
+					<Typography variant="largeTitle" weight="extraBold" className={styles.title} tag="h2">
 						Common Questions
 					</Typography>
-					<Typography
-						variant="largeBody"
-						weight="medium"
-						className={styles.subtitle}
-						tag="p"
-					>
+					<Typography variant="largeBody" weight="medium" className={styles.subtitle} tag="p">
 						Quick answers to help you get started
 					</Typography>
 				</div>
@@ -66,7 +58,7 @@ const FAQSection = ({ className }: FAQSectionProps) => {
 						<div
 							key={index}
 							className={classnames(styles.faqItem, {
-								[styles.open]: openIndex === index
+								[styles.open]: openIndex === index,
 							})}
 						>
 							<button
@@ -75,11 +67,7 @@ const FAQSection = ({ className }: FAQSectionProps) => {
 								aria-expanded={openIndex === index}
 								type="button"
 							>
-								<Typography
-									variant="title"
-									weight="semiBold"
-									className={styles.questionText}
-								>
+								<Typography variant="title" weight="semiBold" className={styles.questionText}>
 									{faq.question}
 								</Typography>
 								<div className={styles.toggleIcon}>
@@ -89,7 +77,7 @@ const FAQSection = ({ className }: FAQSectionProps) => {
 										viewBox="0 0 24 24"
 										fill="none"
 										className={classnames(styles.icon, {
-											[styles.rotated]: openIndex === index
+											[styles.rotated]: openIndex === index,
 										})}
 									>
 										<path
@@ -103,15 +91,13 @@ const FAQSection = ({ className }: FAQSectionProps) => {
 								</div>
 							</button>
 
-							<div className={classnames(styles.faqAnswer, {
-								[styles.open]: openIndex === index
-							})}>
+							<div
+								className={classnames(styles.faqAnswer, {
+									[styles.open]: openIndex === index,
+								})}
+							>
 								<div className={styles.answerContent}>
-									<Typography
-										variant="regularBody"
-										weight="medium"
-										className={styles.answerText}
-									>
+									<Typography variant="regularBody" weight="medium" className={styles.answerText}>
 										{faq.answer}
 									</Typography>
 								</div>

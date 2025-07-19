@@ -7,7 +7,6 @@ import { Typography } from 'components/typography'
 import { Button } from 'components/button'
 import { useScrollSpy } from 'hooks/use-scroll-spy'
 
-
 import styles from './index.module.scss'
 
 interface NavigationItem {
@@ -17,19 +16,19 @@ interface NavigationItem {
 }
 
 const navigationItems: NavigationItem[] = [
-	{ id: 'hero', label: 'Home', href: '#hero' },
-	{ id: 'tool', label: 'Tool', href: '#tool' },
-	{ id: 'how-it-works', label: 'How it Works', href: '#how-it-works' },
-	{ id: 'features', label: 'Features', href: '#features' },
-	{ id: 'faq', label: 'FAQ', href: '#faq' }
+	// { id: 'hero', label: 'Home', href: '#hero' },
+	// { id: 'tool', label: 'Tool', href: '#tool' },
+	// { id: 'how-it-works', label: 'How it Works', href: '#how-it-works' },
+	// { id: 'features', label: 'Features', href: '#features' },
+	// { id: 'faq', label: 'FAQ', href: '#faq' },
 ]
 
 const Header = () => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
 	const { activeSection, scrollToSection } = useScrollSpy({
-		sectionIds: navigationItems.map(item => item.id),
-		offset: 80
+		sectionIds: navigationItems.map((item) => item.id),
+		offset: 80,
 	})
 
 	const handleNavClick = (sectionId: string) => {
@@ -67,7 +66,7 @@ const Header = () => {
 								<button
 									key={item.id}
 									className={classnames(styles.navItem, {
-										[styles.active]: activeSection === item.id
+										[styles.active]: activeSection === item.id,
 									})}
 									onClick={() => handleNavClick(item.id)}
 									type="button"
@@ -93,9 +92,11 @@ const Header = () => {
 								type="button"
 								aria-label="Toggle navigation menu"
 							>
-								<span className={classnames(styles.hamburger, {
-									[styles.open]: isMobileMenuOpen
-								})}>
+								<span
+									className={classnames(styles.hamburger, {
+										[styles.open]: isMobileMenuOpen,
+									})}
+								>
 									<span></span>
 									<span></span>
 									<span></span>
@@ -105,15 +106,17 @@ const Header = () => {
 					</header>
 
 					{/* Mobile Navigation Menu */}
-					<div className={classnames(styles.mobileMenu, {
-						[styles.open]: isMobileMenuOpen
-					})}>
+					<div
+						className={classnames(styles.mobileMenu, {
+							[styles.open]: isMobileMenuOpen,
+						})}
+					>
 						<nav className={styles.mobileNavigation}>
 							{navigationItems.map((item) => (
 								<button
 									key={item.id}
 									className={classnames(styles.mobileNavItem, {
-										[styles.active]: activeSection === item.id
+										[styles.active]: activeSection === item.id,
 									})}
 									onClick={() => handleNavClick(item.id)}
 									type="button"
@@ -124,12 +127,7 @@ const Header = () => {
 								</button>
 							))}
 							<div className={styles.mobileCta}>
-								<Button
-									color="white"
-									background="bgLink"
-									className={styles.mobileCtaButton}
-									onClick={handleGetStarted}
-								>
+								<Button color="white" background="bgLink" className={styles.mobileCtaButton} onClick={handleGetStarted}>
 									Get Started
 								</Button>
 							</div>

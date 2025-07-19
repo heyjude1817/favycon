@@ -4,50 +4,62 @@ import { Typography } from 'components/typography'
 
 import styles from './index.module.scss'
 
-interface Feature {
-	icon: string
+interface FeatureSection {
 	title: string
+	subtitle: string
 	description: string
-	highlight?: boolean
+	features: string[]
+	image: string
+	imageAlt: string
+	reverse?: boolean
 }
 
-const features: Feature[] = [
+const featureSections: FeatureSection[] = [
 	{
-		icon: '🎯',
-		title: 'All Standard Sizes',
-		description: 'Generate 16+ favicon sizes automatically, from 16×16 to 512×512 pixels.',
-		highlight: true
+		title: 'Innovative Solutions for Professional Favicon Generation',
+		subtitle: 'Complete Favicon Package',
+		description:
+			'Faviconify can accurately generate all standard favicon sizes and formats, ensuring that your website displays perfectly across all devices and browsers. This enhances your brand consistency and provides users with a professional browsing experience.',
+		features: [
+			'Generate 16+ standard sizes automatically',
+			'Support for PNG, ICO, and SVG formats',
+			'PWA and mobile app compatibility',
+			'Optimized for all modern browsers',
+		],
+		image: '/images/feature-generation.png',
+		imageAlt: 'Professional favicon generation process',
+		reverse: false,
 	},
 	{
-		icon: '📱',
-		title: 'PWA Compatible',
-		description: 'Includes manifest.json and all mobile app icon sizes for Progressive Web Apps.',
-		highlight: true
+		title: 'Enhanced User Experience with Complete Code Integration',
+		subtitle: 'Ready-to-Use HTML Code',
+		description:
+			'By providing complete HTML code snippets and implementation guides, Faviconify delivers a seamless development experience. This significantly improves development efficiency and ensures proper favicon implementation across all platforms.',
+		features: [
+			'Complete HTML meta tags included',
+			'Copy-paste ready code snippets',
+			'Cross-platform compatibility guides',
+			'Best practices documentation',
+		],
+		image: '/images/feature-code.png',
+		imageAlt: 'HTML code integration and implementation',
+		reverse: true,
 	},
 	{
-		icon: '⚡',
-		title: 'Lightning Fast',
-		description: 'High-quality favicon generation in seconds with Sharp.js processing.',
-		highlight: false
+		title: 'Privacy-First Approach with Lightning Fast Processing',
+		subtitle: 'Secure & Fast',
+		description:
+			'This innovative solution prioritizes user privacy while delivering exceptional performance. It meets the diverse needs of developers, designers, and businesses with broad market potential and practical application value.',
+		features: [
+			'No data storage or tracking',
+			'Processing completed in seconds',
+			'No registration required',
+			'Completely anonymous usage',
+		],
+		image: '/images/feature-privacy.png',
+		imageAlt: 'Privacy-focused and fast favicon processing',
+		reverse: false,
 	},
-	{
-		icon: '🔒',
-		title: 'Privacy First',
-		description: 'No data storage, no tracking, no registration. Completely anonymous.',
-		highlight: false
-	},
-	{
-		icon: '💻',
-		title: 'HTML Code Included',
-		description: 'Ready-to-use HTML snippets with all necessary meta tags and links.',
-		highlight: false
-	},
-	{
-		icon: '🌐',
-		title: 'Universal Support',
-		description: 'Works on all modern browsers and mobile devices with fallback support.',
-		highlight: false
-	}
 ]
 
 interface FeaturesGridProps {
@@ -58,57 +70,48 @@ const FeaturesGrid = ({ className }: FeaturesGridProps) => {
 	return (
 		<section id="features" className={classnames(styles.root, className)}>
 			<div className={styles.container}>
-				<div className={styles.header}>
-					<Typography
-						variant="largeTitle"
-						weight="extraBold"
-						className={styles.title}
-						tag="h2"
+				{featureSections.map((section, index) => (
+					<div
+						key={index}
+						className={classnames(styles.featureSection, {
+							[styles.reverse]: section.reverse,
+						})}
 					>
-						Everything You Need
-					</Typography>
-					<Typography
-						variant="largeBody"
-						weight="medium"
-						className={styles.subtitle}
-						tag="p"
-					>
-						Professional favicon generation with all formats, sizes, and code included
-					</Typography>
-				</div>
-
-				<div className={styles.grid}>
-					{features.map((feature, index) => (
-						<div
-							key={index}
-							className={classnames(styles.feature, {
-								[styles.highlighted]: feature.highlight
-							})}
-						>
-							<div className={styles.featureIcon}>
-								<span className={styles.icon}>{feature.icon}</span>
+						<div className={styles.content}>
+							<div className={styles.textContent}>
+								<Typography variant="title" weight="bold" className={styles.sectionSubtitle} tag="h3">
+									{section.subtitle}
+								</Typography>
+								<Typography variant="largeTitle" weight="extraBold" className={styles.sectionTitle} tag="h2">
+									{section.title}
+								</Typography>
+								<Typography variant="regularBody" weight="medium" className={styles.sectionDescription} tag="p">
+									{section.description}
+								</Typography>
+								<ul className={styles.featureList}>
+									{section.features.map((feature, featureIndex) => (
+										<li key={featureIndex} className={styles.featureItem}>
+											<span className={styles.checkmark}>✓</span>
+											<Typography variant="regularBody" weight="medium" className={styles.featureText}>
+												{feature}
+											</Typography>
+										</li>
+									))}
+								</ul>
 							</div>
-							<div className={styles.featureContent}>
-								<Typography
-									variant="title"
-									weight="bold"
-									className={styles.featureTitle}
-									tag="h3"
-								>
-									{feature.title}
-								</Typography>
-								<Typography
-									variant="regularBody"
-									weight="medium"
-									className={styles.featureDescription}
-									tag="p"
-								>
-									{feature.description}
-								</Typography>
+							<div className={styles.imageContent}>
+								<div className={styles.imageWrapper}>
+									<div className={styles.imagePlaceholder}>
+										<div className={styles.placeholderIcon}>{index === 0 ? '🎯' : index === 1 ? '💻' : '🔒'}</div>
+										<Typography variant="smallBody" weight="medium" className={styles.placeholderText}>
+											{section.imageAlt}
+										</Typography>
+									</div>
+								</div>
 							</div>
 						</div>
-					))}
-				</div>
+					</div>
+				))}
 			</div>
 		</section>
 	)

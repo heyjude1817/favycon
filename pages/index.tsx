@@ -10,7 +10,7 @@ import { FavyconError } from 'components/favycon-error'
 import { SEO } from 'components/seo'
 // import { HeroSection } from 'components/hero-section'
 import { HowItWorks } from 'components/how-it-works'
-import { FeaturesGrid } from 'components/features-grid'
+// import { FeaturesGrid } from 'components/features-grid'
 import { FAQSection } from 'components/faq-section'
 import { Footer } from 'components/footer'
 
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
 			<HowItWorks />
 
 			{/* Features Section */}
-			<FeaturesGrid />
+			{/* <FeaturesGrid /> */}
 
 			{/* FAQ Section */}
 			<FAQSection />

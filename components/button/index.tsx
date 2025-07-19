@@ -8,7 +8,7 @@ export type ButtonProps = {
 	variant?: 'primary' | 'transparent' | 'regularTransparent' | 'modalClose'
 	weight?: 'regular' | 'medium' | 'semiBold' | 'bold'
 	color?: 'black' | 'gray' | 'white' | 'link'
-	background?: 'bgLink' | 'bgGreen' | 'bgDarkGray' | ''
+	background?: 'bgLink' | 'bgGreen' | 'bgDarkGray' | 'transparent' | ''
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
 const Button = ({

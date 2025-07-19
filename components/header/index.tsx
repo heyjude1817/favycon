@@ -18,6 +18,7 @@ interface NavigationItem {
 const navigationItems: NavigationItem[] = [
 	// { id: 'hero', label: 'Home', href: '#hero' },
 	// { id: 'tool', label: 'Tool', href: '#tool' },
+	{ id: 'favicon-download', label: 'Favicon Downloader', href: '/favicon-download' },
 	// { id: 'how-it-works', label: 'How it Works', href: '#how-it-works' },
 	// { id: 'features', label: 'Features', href: '#features' },
 	// { id: 'faq', label: 'FAQ', href: '#faq' },
@@ -31,8 +32,14 @@ const Header = () => {
 		offset: 80,
 	})
 
-	const handleNavClick = (sectionId: string) => {
-		scrollToSection(sectionId)
+	const handleNavClick = (item: NavigationItem) => {
+		if (item.href.startsWith('/')) {
+			// External page navigation
+			window.location.href = item.href
+		} else {
+			// Internal section navigation
+			scrollToSection(item.id)
+		}
 		setIsMobileMenuOpen(false)
 	}
 
@@ -68,7 +75,7 @@ const Header = () => {
 									className={classnames(styles.navItem, {
 										[styles.active]: activeSection === item.id,
 									})}
-									onClick={() => handleNavClick(item.id)}
+									onClick={() => handleNavClick(item)}
 									type="button"
 								>
 									<Typography variant="regularBody" weight="medium">
@@ -118,7 +125,7 @@ const Header = () => {
 									className={classnames(styles.mobileNavItem, {
 										[styles.active]: activeSection === item.id,
 									})}
-									onClick={() => handleNavClick(item.id)}
+									onClick={() => handleNavClick(item)}
 									type="button"
 								>
 									<Typography variant="largeBody" weight="medium">

@@ -32,7 +32,9 @@ import { useMediaQueryContext } from 'components/media-query-provider'
 
 import styles from './index.module.scss'
 
-const Modal = dynamic(() => import('react-modal'))
+const Modal = dynamic(() => import('react-modal').then((mod) => mod.default), {
+	ssr: false,
+})
 
 export type DragAndDropProps = {
 	onFile: (hasFile: boolean) => void

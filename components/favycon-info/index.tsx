@@ -17,7 +17,9 @@ import augustoLopes from '../../public/images/people/augusto-lopes.png'
 import ruiSaraiva from '../../public/images/people/rui-saraiva.png'
 import miguelTeixeira from '../../public/images/people/miguel-teixeira.png'
 
-const Modal = dynamic(() => import('react-modal'))
+const Modal = dynamic(() => import('react-modal').then((mod) => mod.default), {
+	ssr: false,
+})
 
 const people = [
 	{

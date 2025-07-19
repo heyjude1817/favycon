@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import Image from 'next/image'
 import classnames from 'classnames'
 import { Typography } from 'components/typography'
@@ -45,8 +45,36 @@ interface HowItWorksProps {
 }
 
 const HowItWorks = ({ className }: HowItWorksProps) => {
+	const [isVisible, setIsVisible] = useState(false)
+	const sectionRef = useRef<HTMLElement>(null)
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					setIsVisible(true)
+					observer.disconnect() // Stop observing once visible
+				}
+			},
+			{
+				threshold: 0.1, // Trigger when 10% of the element is visible
+				rootMargin: '50px 0px', // Start loading 50px before entering viewport
+			}
+		)
+
+		if (sectionRef.current) {
+			observer.observe(sectionRef.current)
+		}
+
+		return () => observer.disconnect()
+	}, [])
+
 	return (
-		<section id="how-it-works" className={classnames(styles.root, className)}>
+		<section
+			id="how-it-works"
+			ref={sectionRef}
+			className={classnames(styles.root, className, { [styles.visible]: isVisible })}
+		>
 			<div className={styles.container}>
 				<div className={styles.header}>
 					<div className={styles.badge}>
@@ -83,14 +111,20 @@ const HowItWorks = ({ className }: HowItWorksProps) => {
 								</div>
 								<div className={styles.stepImage}>
 									<div className={styles.imageWrapper}>
-										<Image
-											src={step.image}
-											alt={step.imageAlt}
-											width={500}
-											height={350}
-											className={styles.image}
-											priority={index === 0}
-										/>
+										{isVisible && (
+											<Image
+												src={step.image}
+												alt={step.imageAlt}
+												width={500}
+												height={350}
+												className={styles.image}
+												priority={index === 0}
+												loading={index === 0 ? 'eager' : 'lazy'}
+												quality={85}
+												placeholder="blur"
+												blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+											/>
+										)}
 									</div>
 								</div>
 							</div>

@@ -5,6 +5,7 @@
 .root {
 	padding: 100px 0;
 	background: $white;
+	contain: layout style paint;
 
 	@include breakpoint-md-up {
 		padding: 140px 0;
@@ -81,6 +82,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
+	contain: layout style;
 
 	@include breakpoint-md-up {
 		gap: 40px;
@@ -184,12 +186,16 @@
 	overflow: hidden;
 	border: 1px solid rgba(0, 0, 0, 5%);
 	border-radius: 16px;
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 10%);
-	transition: all 0.3s ease;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 8%);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	transform: translateZ(0); // Force hardware acceleration
+	will-change: auto;
+	contain: layout style paint;
 
 	&:hover {
-		box-shadow: 0 30px 80px rgba(0, 0, 0, 15%);
-		transform: translateY(-4px);
+		box-shadow: 0 15px 40px rgba(0, 0, 0, 12%);
+		transform: translateY(-2px) translateZ(0);
+		will-change: transform, box-shadow;
 	}
 
 	@include breakpoint-md-up {
@@ -202,12 +208,33 @@
 	height: 100%;
 	object-fit: contain;
 	background: transparent;
-	transition: transform 0.3s ease;
+	transition: transform 0.2s ease;
+	transform: translateZ(0); // Force hardware acceleration
+	will-change: auto;
 
 	.imageWrapper:hover & {
-		transform: scale(1.02);
+		transform: scale(1.01) translateZ(0);
+		will-change: transform;
 	}
 }
+
+:global(.dark) .imageWrapper {
+	border-color: rgba(255, 255, 255, 10%);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 40%);
+}
+
+// Disable animations until section is visible
+.root:not(.visible) {
+	.imageWrapper {
+		transition: none;
+	}
+
+	.image {
+		transition: none;
+	}
+}
+
+
 
 
 
@@ -237,10 +264,7 @@
 	color: #94a3b8;
 }
 
-:global(.dark) .imageWrapper {
-	border-color: rgba(255, 255, 255, 10%);
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 40%);
-}
+
 
 :global(.dark) .imagePlaceholder {
 	background: linear-gradient(135deg, #1e293b 0%, #334155 100%);

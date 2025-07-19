@@ -28,30 +28,19 @@ const Footer = ({ className }: FooterProps) => {
 
 					{/* Links */}
 					<div className={styles.links}>
-						<a 
-							href="https://github.com/faviconify/faviconify" 
-							target="_blank" 
-							rel="noopener noreferrer"
-							className={styles.link}
-						>
-							<Typography variant="regularBody" weight="medium">
-								GitHub
-							</Typography>
-						</a>
-						<a 
-							href="#" 
-							className={styles.link}
-						>
+						<a href="/privacy-policy" className={styles.link}>
 							<Typography variant="regularBody" weight="medium">
 								Privacy Policy
 							</Typography>
 						</a>
-						<a 
-							href="#" 
-							className={styles.link}
-						>
+						<a href="/terms-of-service" className={styles.link}>
 							<Typography variant="regularBody" weight="medium">
-								Terms
+								Terms of Service
+							</Typography>
+						</a>
+						<a href="/contact" className={styles.link}>
+							<Typography variant="regularBody" weight="medium">
+								Contact
 							</Typography>
 						</a>
 					</div>

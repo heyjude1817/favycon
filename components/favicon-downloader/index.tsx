@@ -452,6 +452,22 @@ const FaviconDownloader = ({ className }: FaviconDownloaderProps) => {
 					<Typography variant="largeBody" weight="medium" className={styles.subtitle} tag="p">
 						Extract and download favicons from any website. Get all available sizes and formats instantly.
 					</Typography>
+
+					{/* Page Navigation */}
+					<nav className={styles.pageNav}>
+						<a href="#features" className={styles.navLink}>
+							Features
+						</a>
+						<a href="#benefits" className={styles.navLink}>
+							Benefits
+						</a>
+						<a href="#use-cases" className={styles.navLink}>
+							Use Cases
+						</a>
+						<a href="#faq" className={styles.navLink}>
+							FAQ
+						</a>
+					</nav>
 				</div>
 
 				{/* Search Form */}

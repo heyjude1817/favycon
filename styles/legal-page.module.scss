@@ -1,0 +1,224 @@
+@use './variables' as *;
+@use './breakpoints' as *;
+
+.main {
+	min-height: calc(100vh - 200px);
+	padding: 80px 0;
+	background: $white;
+
+	@include breakpoint-md-up {
+		padding: 120px 0;
+	}
+}
+
+.container {
+	max-width: 800px;
+	padding: 0 20px;
+	margin: 0 auto;
+
+	@include breakpoint-md-up {
+		padding: 0 40px;
+	}
+}
+
+.header {
+	margin-bottom: 60px;
+	text-align: center;
+
+	@include breakpoint-md-up {
+		margin-bottom: 80px;
+	}
+}
+
+.title {
+	margin: 0 0 16px;
+	font-size: 2.5rem;
+	font-weight: 800;
+	color: #1a202c;
+	letter-spacing: -0.02em;
+
+	@include breakpoint-md-up {
+		margin-bottom: 20px;
+		font-size: 3rem;
+	}
+}
+
+.subtitle {
+	margin: 0;
+	font-size: 1.125rem;
+	line-height: 1.6;
+	color: #64748b;
+
+	@include breakpoint-md-up {
+		font-size: 1.25rem;
+	}
+}
+
+.lastUpdated {
+	margin: 0;
+	font-size: 0.95rem;
+	font-style: italic;
+	color: #94a3b8;
+
+	@include breakpoint-md-up {
+		font-size: 1rem;
+	}
+}
+
+.content {
+	max-width: 100%;
+}
+
+.section {
+	margin-bottom: 48px;
+
+	@include breakpoint-md-up {
+		margin-bottom: 60px;
+	}
+}
+
+.sectionTitle {
+	margin: 0 0 20px;
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #1a202c;
+
+	@include breakpoint-md-up {
+		margin-bottom: 24px;
+		font-size: 1.75rem;
+	}
+}
+
+.text {
+	margin: 0 0 16px;
+	font-size: 1rem;
+	line-height: 1.7;
+	color: #374151;
+
+	@include breakpoint-md-up {
+		font-size: 1.125rem;
+		line-height: 1.8;
+	}
+}
+
+.list {
+	padding-left: 24px;
+	margin: 16px 0;
+	color: #374151;
+
+	li {
+		margin-bottom: 8px;
+		font-size: 1rem;
+		line-height: 1.6;
+
+		@include breakpoint-md-up {
+			font-size: 1.125rem;
+			line-height: 1.7;
+		}
+	}
+
+	@include breakpoint-md-up {
+		padding-left: 32px;
+		margin: 20px 0;
+	}
+}
+
+.contactInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin: 24px 0;
+
+	@include breakpoint-md-up {
+		gap: 32px;
+		margin: 32px 0;
+	}
+}
+
+.contactItem {
+	padding: 24px;
+	background: #f8fafc;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	transition: all 0.2s ease;
+
+	&:hover {
+		border-color: rgba($link, 0.3);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 5%);
+	}
+
+	@include breakpoint-md-up {
+		padding: 32px;
+	}
+}
+
+.contactLabel {
+	margin: 0 0 8px;
+	font-size: 0.875rem;
+	color: #64748b;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+
+	@include breakpoint-md-up {
+		margin-bottom: 12px;
+		font-size: 0.95rem;
+	}
+}
+
+.contactValue {
+	margin: 0;
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: #1a202c;
+
+	@include breakpoint-md-up {
+		font-size: 1.25rem;
+	}
+}
+
+// Dark mode styles
+:global(.dark) .main {
+	background: #0f172a;
+}
+
+:global(.dark) .title {
+	color: #f1f5f9;
+}
+
+:global(.dark) .subtitle {
+	color: #94a3b8;
+}
+
+:global(.dark) .lastUpdated {
+	color: #64748b;
+}
+
+:global(.dark) .sectionTitle {
+	color: #f1f5f9;
+}
+
+:global(.dark) .text {
+	color: #cbd5e1;
+}
+
+:global(.dark) .list {
+	color: #cbd5e1;
+}
+
+:global(.dark) .contactItem {
+	background: #1e293b;
+	border-color: rgba(255, 255, 255, 10%);
+
+	&:hover {
+		border-color: rgba($link, 0.5);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 20%);
+	}
+}
+
+:global(.dark) .contactLabel {
+	color: #94a3b8;
+}
+
+:global(.dark) .contactValue {
+	color: #f1f5f9;
+}

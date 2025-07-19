@@ -2,15 +2,15 @@
 @use '../../styles/breakpoints' as *;
 
 .root {
-	background: $darker-black;
 	padding: 60px 0 40px;
+	background: $darker-black;
 	border-top: 1px solid rgba($light-grey, 0.1);
 }
 
 .container {
 	max-width: 1200px;
-	margin: 0 auto;
 	padding: 0 20px;
+	margin: 0 auto;
 
 	@include breakpoint-md {
 		padding: 0 40px;
@@ -18,16 +18,15 @@
 }
 
 .content {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr;
 	gap: 40px;
 	margin-bottom: 40px;
 
 	@include breakpoint-md {
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: flex-start;
+		grid-template-columns: 2fr 1fr 1fr 1fr;
 		gap: 60px;
+		align-items: flex-start;
 	}
 }
 
@@ -38,6 +37,25 @@
 	max-width: 300px;
 }
 
+.section {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.sectionTitle {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 600;
+	color: $off-white;
+}
+
+.sectionLinks {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
 .logo {
 	svg {
 		width: 40px;
@@ -46,23 +64,13 @@
 }
 
 .description {
-	color: $light-grey;
 	margin: 0;
 	line-height: 1.5;
-}
-
-.links {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-
-	@include breakpoint-md {
-		flex-direction: row;
-		gap: 32px;
-	}
+	color: $light-grey;
 }
 
 .link {
+	font-size: 0.95rem;
 	color: $light-grey;
 	text-decoration: none;
 	transition: color 0.2s ease;
@@ -72,9 +80,9 @@
 	}
 
 	&:focus {
+		border-radius: 4px;
 		outline: 2px solid $link;
 		outline-offset: 2px;
-		border-radius: 4px;
 	}
 }
 
@@ -83,20 +91,20 @@
 	flex-direction: column;
 	gap: 8px;
 	padding-top: 40px;
-	border-top: 1px solid rgba($light-grey, 0.1);
 	text-align: center;
+	border-top: 1px solid rgba($light-grey, 0.1);
 
 	@include breakpoint-md {
 		flex-direction: row;
-		justify-content: space-between;
 		align-items: center;
+		justify-content: space-between;
 		text-align: left;
 	}
 }
 
 .copyrightText {
-	color: rgba($light-grey, 0.8);
 	margin: 0;
+	color: rgba($light-grey, 0.8);
 }
 
 // Light mode styles (when not in dark mode)
@@ -107,6 +115,10 @@
 
 :global(:not(.dark)) .description {
 	color: $dark-grey;
+}
+
+:global(:not(.dark)) .sectionTitle {
+	color: $black;
 }
 
 :global(:not(.dark)) .link {

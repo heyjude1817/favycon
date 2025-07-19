@@ -4,6 +4,9 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import classnames from 'classnames'
 import { useDropzone, FileRejection } from 'react-dropzone'
 import { CSSTransition } from 'react-transition-group'
+
+// Type assertion to resolve React 18 compatibility issues
+const CSSTransitionComponent = CSSTransition as any
 import { useDrag } from '@use-gesture/react'
 import splitbee from '@splitbee/web'
 import { headTemplate } from 'utils/favicon'
@@ -274,24 +277,24 @@ const DragAndDrop = ({ onFile, onGenerate, onError }: DragAndDropProps) => {
 									})}
 									data-cy="drag-and-drop-text"
 								>
-									<CSSTransition in={!isDragActive} timeout={200} classNames="collapse" unmountOnExit>
+									<CSSTransitionComponent in={!isDragActive} timeout={200} classNames="collapse" unmountOnExit>
 										<span>Drag &amp;&nbsp;</span>
-									</CSSTransition>
+									</CSSTransitionComponent>
 									<span>{isDragActive ? 'Drop' : 'drop'}</span>
-									<CSSTransition in={!isDragActive} timeout={200} classNames="collapse" unmountOnExit>
+									<CSSTransitionComponent in={!isDragActive} timeout={200} classNames="collapse" unmountOnExit>
 										<span>&nbsp;an</span>
-									</CSSTransition>
+									</CSSTransitionComponent>
 									<span>&nbsp;image file here</span>
-									<CSSTransition in={isDragActive} timeout={200} classNames="collapse" unmountOnExit>
+									<CSSTransitionComponent in={isDragActive} timeout={200} classNames="collapse" unmountOnExit>
 										<span>...</span>
-									</CSSTransition>
-									<CSSTransition in={!isDragActive} timeout={200} classNames="fade" unmountOnExit>
+									</CSSTransitionComponent>
+									<CSSTransitionComponent in={!isDragActive} timeout={200} classNames="fade" unmountOnExit>
 										<span>,</span>
-									</CSSTransition>
+									</CSSTransitionComponent>
 									<br />
-									<CSSTransition in={!isDragActive} timeout={200} classNames="fade" unmountOnExit>
+									<CSSTransitionComponent in={!isDragActive} timeout={200} classNames="fade" unmountOnExit>
 										<span>or click to select a file.</span>
-									</CSSTransition>
+									</CSSTransitionComponent>
 								</Typography>
 							</div>
 						</div>

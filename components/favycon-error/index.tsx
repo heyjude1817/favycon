@@ -5,6 +5,9 @@ import { Typography } from 'components/typography'
 
 import styles from './index.module.scss'
 
+// Type assertion to resolve React 18 compatibility issues
+const CSSTransitionComponent = CSSTransition as any
+
 type FavyconErrorProps = {
 	error: string
 	clearError: () => void
@@ -31,7 +34,7 @@ const FavyconError = ({ error, clearError }: FavyconErrorProps) => {
 	}, [error, clearError])
 
 	return (
-		<CSSTransition in={showError} timeout={300} classNames="error" unmountOnExit>
+		<CSSTransitionComponent in={showError} timeout={300} classNames="error" unmountOnExit>
 			<div className={classnames(styles.error)}>
 				<Typography
 					className={classnames(styles.content)}
@@ -46,7 +49,7 @@ const FavyconError = ({ error, clearError }: FavyconErrorProps) => {
 					<circle className={classnames(styles.progress)} fill="transparent" stroke="white" r={7} cx={10} cy={10} />
 				</svg>
 			</div>
-		</CSSTransition>
+		</CSSTransitionComponent>
 	)
 }
 

@@ -32,3 +32,9 @@ $breakpoint-lg: 1200px;
 		@content;
 	}
 }
+
+@mixin breakpoint-lg-up {
+	@media screen and (min-width: $breakpoint-lg) {
+		@content;
+	}
+}

@@ -20,7 +20,7 @@ const FaviconDownloadPage = ({}: FaviconDownloadPageProps) => {
 				title="Free Favicon Downloader - Extract All Website Icons in ZIP | Faviconify"
 				description="Professional favicon downloader tool to extract and download all favicon sizes from any website. Get ICO, PNG, SVG, Apple Touch icons in one ZIP file. Free, fast, and no registration required."
 				keywords="favicon downloader, extract favicon, download website icons, favicon extractor, website favicon, favicon checker, favicon finder, favicon zip download, bulk favicon download, favicon extraction tool, website icon downloader, favicon grabber, favicon ripper, favicon collector, apple touch icon downloader, ico png svg favicon, favicon batch download, favicon archive download"
-				url="https://faviconify.com/favicon-download"
+				url="https://faviconify.online/favicon-download"
 			/>
 			<Header />
 			<main>

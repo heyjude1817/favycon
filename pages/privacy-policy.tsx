@@ -17,7 +17,7 @@ const PrivacyPolicyPage = ({}: PrivacyPolicyPageProps) => {
 			<SEO
 				title="Privacy Policy | Faviconify"
 				description="Learn how Faviconify protects your privacy. We don't collect personal data and process everything locally in your browser."
-				url="https://faviconify.com/privacy-policy"
+				url="https://faviconify.online/privacy-policy"
 			/>
 			<Header />
 			<main className={styles.main}>
@@ -143,7 +143,7 @@ const PrivacyPolicyPage = ({}: PrivacyPolicyPageProps) => {
 								Contact Us
 							</Typography>
 							<Typography variant="regularBody" weight="medium" className={styles.text} tag="p">
-								If you have any questions about this Privacy Policy, please contact us at privacy@faviconify.com.
+								If you have any questions about this Privacy Policy, please contact us at privacy@faviconify.online.
 							</Typography>
 						</section>
 					</div>

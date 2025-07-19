@@ -14,12 +14,13 @@ type SEOProps = {
 }
 
 const defaultProps = {
-	keywords: 'favicon generator, favicon maker, website icon, favicon creator, PWA icons, free favicon tool, convert image to favicon, favicon HTML code, multi-size favicon, online favicon generator',
-	url: 'https://faviconify.vercel.app',
-	image: 'https://faviconify.vercel.app/share.png?v5',
+	keywords:
+		'favicon generator, favicon maker, website icon, favicon creator, PWA icons, free favicon tool, convert image to favicon, favicon HTML code, multi-size favicon, online favicon generator',
+	url: 'https://faviconify.online',
+	image: 'https://faviconify.online/share.png?v5',
 	type: 'website' as const,
 	siteName: 'Faviconify',
-	author: 'Faviconify Team'
+	author: 'Faviconify Team',
 }
 
 const SEO = ({
@@ -32,7 +33,7 @@ const SEO = ({
 	siteName = defaultProps.siteName,
 	author = defaultProps.author,
 	publishedTime,
-	modifiedTime
+	modifiedTime,
 }: SEOProps) => {
 	// Generate structured data for SEO
 	const structuredData = {
@@ -46,11 +47,11 @@ const SEO = ({
 		offers: {
 			'@type': 'Offer',
 			price: '0',
-			priceCurrency: 'USD'
+			priceCurrency: 'USD',
 		},
 		creator: {
 			'@type': 'Organization',
-			name: author
+			name: author,
 		},
 		featureList: [
 			'Generate favicon in multiple sizes',
@@ -58,8 +59,8 @@ const SEO = ({
 			'PWA compatible icons',
 			'Instant HTML code generation',
 			'Free online tool',
-			'No registration required'
-		]
+			'No registration required',
+		],
 	}
 
 	return (
@@ -125,7 +126,7 @@ const SEO = ({
 			<script
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{
-					__html: JSON.stringify(structuredData)
+					__html: JSON.stringify(structuredData),
 				}}
 			/>
 		</Head>

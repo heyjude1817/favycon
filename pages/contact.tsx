@@ -17,7 +17,7 @@ const ContactPage = ({}: ContactPageProps) => {
 			<SEO
 				title="Contact Us | Faviconify"
 				description="Get in touch with the Faviconify team. We're here to help with any questions about our favicon generation tools."
-				url="https://faviconify.com/contact"
+				url="https://faviconify.online/contact"
 			/>
 			<Header />
 			<main className={styles.main}>
@@ -51,7 +51,7 @@ const ContactPage = ({}: ContactPageProps) => {
 										General Inquiries
 									</Typography>
 									<Typography variant="regularBody" weight="medium" className={styles.contactValue} tag="div">
-										hello@faviconify.com
+										hello@faviconify.online
 									</Typography>
 								</div>
 								<div className={styles.contactItem}>
@@ -59,7 +59,7 @@ const ContactPage = ({}: ContactPageProps) => {
 										Technical Support
 									</Typography>
 									<Typography variant="regularBody" weight="medium" className={styles.contactValue} tag="div">
-										support@faviconify.com
+										support@faviconify.online
 									</Typography>
 								</div>
 								<div className={styles.contactItem}>
@@ -67,7 +67,7 @@ const ContactPage = ({}: ContactPageProps) => {
 										Privacy & Legal
 									</Typography>
 									<Typography variant="regularBody" weight="medium" className={styles.contactValue} tag="div">
-										legal@faviconify.com
+										legal@faviconify.online
 									</Typography>
 								</div>
 							</div>

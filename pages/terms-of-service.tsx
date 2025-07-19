@@ -17,7 +17,7 @@ const TermsOfServicePage = ({}: TermsOfServicePageProps) => {
 			<SEO
 				title="Terms of Service | Faviconify"
 				description="Read our terms of service for using Faviconify's free favicon generation and download tools."
-				url="https://faviconify.com/terms-of-service"
+				url="https://faviconify.online/terms-of-service"
 			/>
 			<Header />
 			<main className={styles.main}>
@@ -160,7 +160,7 @@ const TermsOfServicePage = ({}: TermsOfServicePageProps) => {
 								Contact Information
 							</Typography>
 							<Typography variant="regularBody" weight="medium" className={styles.text} tag="p">
-								If you have any questions about these Terms of Service, please contact us at legal@faviconify.com.
+								If you have any questions about these Terms of Service, please contact us at legal@faviconify.online.
 							</Typography>
 						</section>
 					</div>

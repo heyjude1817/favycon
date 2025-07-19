@@ -1,47 +1,34 @@
 {
-  "projectName": "favycon",
-  "projectOwner": "toolslab",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "files": [
-    "README.md"
-  ],
-  "imageSize": 100,
-  "commit": true,
-  "commitConvention": "angular",
-  "contributors": [
-    {
-      "login": "ruisaraiva19",
-      "name": "Rui Saraiva",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/7356098?v=4",
-      "profile": "https://ruisaraiva.com",
-      "contributions": [
-        "infra",
-        "code",
-        "doc",
-        "question",
-        "maintenance"
-      ]
-    },
-    {
-      "login": "otsugua",
-      "name": "Augusto Lopes",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/9093629?v=4",
-      "profile": "https://github.com/otsugua",
-      "contributions": [
-        "design"
-      ]
-    },
-    {
-      "login": "miguellteixeira",
-      "name": "Miguel Teixeira",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/17954325?v=4",
-      "profile": "https://github.com/miguellteixeira",
-      "contributions": [
-        "code",
-        "review"
-      ]
-    }
-  ],
-  "contributorsPerLine": 7
+	"projectName": "favycon",
+	"projectOwner": "toolslab",
+	"repoType": "github",
+	"repoHost": "https://github.com",
+	"files": ["README.md"],
+	"imageSize": 100,
+	"commit": true,
+	"commitConvention": "angular",
+	"contributors": [
+		{
+			"login": "ruisaraiva19",
+			"name": "Rui Saraiva",
+			"avatar_url": "https://avatars2.githubusercontent.com/u/7356098?v=4",
+			"profile": "https://ruisaraiva.com",
+			"contributions": ["infra", "code", "doc", "question", "maintenance"]
+		},
+		{
+			"login": "otsugua",
+			"name": "Augusto Lopes",
+			"avatar_url": "https://avatars2.githubusercontent.com/u/9093629?v=4",
+			"profile": "https://github.com/otsugua",
+			"contributions": ["design"]
+		},
+		{
+			"login": "miguellteixeira",
+			"name": "Miguel Teixeira",
+			"avatar_url": "https://avatars1.githubusercontent.com/u/17954325?v=4",
+			"profile": "https://github.com/miguellteixeira",
+			"contributions": ["code", "review"]
+		}
+	],
+	"contributorsPerLine": 7
 }

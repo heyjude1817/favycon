@@ -13,7 +13,7 @@ export const scrollToElement = (elementId: string, offset: number = 80): void =>
 
 	window.scrollTo({
 		top: offsetPosition,
-		behavior: 'smooth'
+		behavior: 'smooth',
 	})
 }
 
@@ -23,7 +23,7 @@ export const scrollToElement = (elementId: string, offset: number = 80): void =>
 export const scrollToTop = (): void => {
 	window.scrollTo({
 		top: 0,
-		behavior: 'smooth'
+		behavior: 'smooth',
 	})
 }
 
@@ -41,10 +41,7 @@ export const isElementInViewport = (element: Element, offset: number = 0): boole
 	const rect = element.getBoundingClientRect()
 	const windowHeight = window.innerHeight || document.documentElement.clientHeight
 
-	return (
-		rect.top >= -offset &&
-		rect.bottom <= windowHeight + offset
-	)
+	return rect.top >= -offset && rect.bottom <= windowHeight + offset
 }
 
 /**
@@ -67,10 +64,13 @@ export const throttle = <T extends (...args: any[]) => any>(
 			if (timeoutId) {
 				clearTimeout(timeoutId)
 			}
-			timeoutId = setTimeout(() => {
-				func(...args)
-				lastExecTime = Date.now()
-			}, delay - (currentTime - lastExecTime))
+			timeoutId = setTimeout(
+				() => {
+					func(...args)
+					lastExecTime = Date.now()
+				},
+				delay - (currentTime - lastExecTime)
+			)
 		}
 	}
 }

@@ -15,26 +15,29 @@ interface UseScrollSpyReturn {
  * Hook for tracking which section is currently visible in the viewport
  * and providing smooth scroll functionality
  */
-export const useScrollSpy = ({ 
-	sectionIds, 
+export const useScrollSpy = ({
+	sectionIds,
 	offset = 100,
-	rootMargin = '-20% 0px -80% 0px'
+	rootMargin = '-20% 0px -80% 0px',
 }: UseScrollSpyOptions): UseScrollSpyReturn => {
 	const [activeSection, setActiveSection] = useState<string | null>(null)
 
 	// Smooth scroll to section
-	const scrollToSection = useCallback((sectionId: string) => {
-		const element = document.getElementById(sectionId)
-		if (element) {
-			const elementPosition = element.getBoundingClientRect().top
-			const offsetPosition = elementPosition + window.pageYOffset - offset
+	const scrollToSection = useCallback(
+		(sectionId: string) => {
+			const element = document.getElementById(sectionId)
+			if (element) {
+				const elementPosition = element.getBoundingClientRect().top
+				const offsetPosition = elementPosition + window.pageYOffset - offset
 
-			window.scrollTo({
-				top: offsetPosition,
-				behavior: 'smooth'
-			})
-		}
-	}, [offset])
+				window.scrollTo({
+					top: offsetPosition,
+					behavior: 'smooth',
+				})
+			}
+		},
+		[offset]
+	)
 
 	useEffect(() => {
 		// Check if Intersection Observer is supported
@@ -62,7 +65,7 @@ export const useScrollSpy = ({
 			},
 			{
 				rootMargin,
-				threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+				threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
 			}
 		)
 
@@ -86,6 +89,6 @@ export const useScrollSpy = ({
 
 	return {
 		activeSection,
-		scrollToSection
+		scrollToSection,
 	}
 }

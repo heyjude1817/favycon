@@ -17,7 +17,7 @@ const ContactPage = ({}: ContactPageProps) => {
 			<SEO
 				title="Contact Us | Faviconify"
 				description="Get in touch with the Faviconify team. We're here to help with any questions about our favicon generation tools."
-				canonical="https://faviconify.com/contact"
+				url="https://faviconify.com/contact"
 			/>
 			<Header />
 			<main className={styles.main}>

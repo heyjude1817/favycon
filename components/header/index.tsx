@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 import classnames from 'classnames'
 import { DarkModeToggle } from 'components/dark-mode-toggle'
 import { SvgFavycon } from 'components/svgs/svg-favycon'
@@ -18,6 +19,7 @@ interface NavigationItem {
 const navigationItems: NavigationItem[] = [
 	// { id: 'hero', label: 'Home', href: '#hero' },
 	// { id: 'tool', label: 'Tool', href: '#tool' },
+	{ id: 'favicon-generator', label: 'Favicon generator', href: '/favicon-generator' },
 	{ id: 'favicon-download', label: 'Favicon Downloader', href: '/favicon-download' },
 	// { id: 'how-it-works', label: 'How it Works', href: '#how-it-works' },
 	// { id: 'features', label: 'Features', href: '#features' },
@@ -58,14 +60,14 @@ const Header = () => {
 				<div className={styles.container}>
 					<header className={styles.header}>
 						{/* Logo and Brand */}
-						<div className={styles.brand}>
+						<Link href="/" className={styles.brand}>
 							<div className={styles.logo}>
 								<SvgFavycon />
 							</div>
 							<Typography variant="title" weight="bold" className={styles.brandName}>
 								Faviconify
 							</Typography>
-						</div>
+						</Link>
 
 						{/* Desktop Navigation */}
 						<nav className={styles.navigation}>

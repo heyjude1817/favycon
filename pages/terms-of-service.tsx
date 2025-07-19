@@ -17,7 +17,7 @@ const TermsOfServicePage = ({}: TermsOfServicePageProps) => {
 			<SEO
 				title="Terms of Service | Faviconify"
 				description="Read our terms of service for using Faviconify's free favicon generation and download tools."
-				canonical="https://faviconify.com/terms-of-service"
+				url="https://faviconify.com/terms-of-service"
 			/>
 			<Header />
 			<main className={styles.main}>

@@ -17,7 +17,7 @@ const PrivacyPolicyPage = ({}: PrivacyPolicyPageProps) => {
 			<SEO
 				title="Privacy Policy | Faviconify"
 				description="Learn how Faviconify protects your privacy. We don't collect personal data and process everything locally in your browser."
-				canonical="https://faviconify.com/privacy-policy"
+				url="https://faviconify.com/privacy-policy"
 			/>
 			<Header />
 			<main className={styles.main}>

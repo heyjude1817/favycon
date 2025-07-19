@@ -2,18 +2,18 @@
 @use '../../styles/breakpoints' as *;
 
 .root {
-	padding: 0;
 	position: relative;
-	background: rgba(255, 255, 255, 0.95);
+	padding: 0;
+	background: rgba(255, 255, 255, 95%);
 	backdrop-filter: blur(10px);
-	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	border-bottom: 1px solid rgba(0, 0, 0, 5%);
 }
 
 .container {
+	max-width: 1200px;
 	height: 80px;
 	padding: 0 20px;
 	margin: 0 auto;
-	max-width: 1200px;
 
 	@include breakpoint-md-up {
 		height: 88px;
@@ -25,20 +25,27 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	height: 100%;
 	width: 100%;
+	height: 100%;
 }
 
 .brand {
 	display: flex;
-	align-items: center;
-	gap: 12px;
 	flex-shrink: 0;
+	gap: 12px;
+	align-items: center;
+	text-decoration: none;
 	cursor: pointer;
 	transition: all 0.2s ease;
 
 	&:hover {
 		opacity: 0.8;
+	}
+
+	&:focus {
+		border-radius: 4px;
+		outline: 2px solid $link;
+		outline-offset: 2px;
 	}
 }
 
@@ -57,10 +64,10 @@
 }
 
 .brandName {
-	color: #1a202c;
 	margin: 0;
 	font-size: 1.25rem;
 	font-weight: 700;
+	color: #1a202c;
 	letter-spacing: -0.01em;
 
 	@include breakpoint-md-up {
@@ -70,9 +77,9 @@
 
 .actions {
 	display: flex;
-	align-items: center;
-	gap: 12px;
 	flex-shrink: 0;
+	gap: 12px;
+	align-items: center;
 
 	@include breakpoint-md-up {
 		gap: 16px;
@@ -83,9 +90,9 @@
 
 .darkModeWrapper {
 	background: #f8fafc;
+	border: 1px solid rgba(0, 0, 0, 5%);
 	border-radius: 8px;
 	transition: all 0.2s ease;
-	border: 1px solid rgba(0, 0, 0, 0.05);
 
 	&:hover {
 		background: #f1f5f9;
@@ -100,9 +107,9 @@
 // Desktop Navigation
 .navigation {
 	display: none;
-	align-items: center;
-	gap: 16px;
 	flex: 1;
+	gap: 16px;
+	align-items: center;
 	justify-content: center;
 
 	@include breakpoint-md-up {
@@ -118,21 +125,21 @@
 
 
 .navItem {
-	background: none;
-	border: none;
-	cursor: pointer;
+	position: relative;
 	padding: 10px 16px;
-	border-radius: 8px;
-	transition: all 0.2s ease;
-	color: #64748b;
 	font-size: 0.9rem;
 	font-weight: 500;
-	position: relative;
+	color: #64748b;
 	white-space: nowrap;
+	cursor: pointer;
+	background: none;
+	border: none;
+	border-radius: 8px;
+	transition: all 0.2s ease;
 
 	&:hover {
 		color: #1a202c;
-		background: rgba(59, 130, 246, 0.05);
+		background: rgba(59, 130, 246, 5%);
 	}
 
 	&.active {
@@ -156,10 +163,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: #f8fafc;
-	border: 1px solid rgba(0, 0, 0, 0.05);
-	cursor: pointer;
 	padding: 8px;
+	cursor: pointer;
+	background: #f8fafc;
+	border: 1px solid rgba(0, 0, 0, 5%);
 	border-radius: 8px;
 	transition: all 0.2s ease;
 
@@ -173,16 +180,16 @@
 }
 
 .hamburger {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	width: 18px;
 	height: 14px;
-	position: relative;
 
 	span {
 		display: block;
-		height: 2px;
 		width: 100%;
+		height: 2px;
 		background: #64748b;
 		border-radius: 1px;
 		transition: all 0.3s ease;
@@ -199,23 +206,27 @@
 			transform-origin: bottom left;
 		}
 	}
+}
 
-	&.open {
-		span {
-			&:nth-child(1) {
-				transform: rotate(45deg) translate(1px, -1px);
-				background: $link;
-			}
+:global(.dark) .hamburger span {
+	background: #94a3b8;
+}
 
-			&:nth-child(2) {
-				opacity: 0;
-				transform: translateX(-10px);
-			}
+.hamburger.open {
+	span {
+		&:nth-child(1) {
+			background: $link;
+			transform: rotate(45deg) translate(1px, -1px);
+		}
 
-			&:nth-child(3) {
-				transform: rotate(-45deg) translate(1px, 1px);
-				background: $link;
-			}
+		&:nth-child(2) {
+			opacity: 0;
+			transform: translateX(-10px);
+		}
+
+		&:nth-child(3) {
+			background: $link;
+			transform: rotate(-45deg) translate(1px, 1px);
 		}
 	}
 }
@@ -224,77 +235,77 @@
 .mobileMenu {
 	position: absolute;
 	top: 100%;
-	left: 20px;
 	right: 20px;
-	background: $white;
-	border-radius: 16px;
-	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-	transform: translateY(-20px);
-	opacity: 0;
-	visibility: hidden;
-	transition: all 0.3s ease;
+	left: 20px;
 	z-index: 1000;
-	border: 1px solid rgba(0, 0, 0, 0.05);
+	visibility: hidden;
+	background: $white;
+	border: 1px solid rgba(0, 0, 0, 5%);
+	border-radius: 16px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 15%);
+	opacity: 0;
+	transition: all 0.3s ease;
+	transform: translateY(-20px);
 
 	@include breakpoint-md-up {
 		display: none;
 	}
 
 	&.open {
-		transform: translateY(0);
-		opacity: 1;
 		visibility: visible;
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
 
 .mobileNavigation {
-	padding: 24px;
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
+	padding: 24px;
 }
 
 .mobileNavItem {
-	background: none;
-	border: none;
-	cursor: pointer;
 	padding: 14px 16px;
-	border-radius: 10px;
-	transition: all 0.2s ease;
+	font-weight: 500;
 	color: #64748b;
 	text-align: left;
-	font-weight: 500;
+	cursor: pointer;
+	background: none;
+	border: none;
+	border-radius: 10px;
+	transition: all 0.2s ease;
 
 	&:hover {
-		background: rgba($link, 0.05);
 		color: #1a202c;
+		background: rgba($link, 0.05);
 	}
 
 	&.active {
-		background: rgba($link, 0.1);
 		color: $link;
+		background: rgba($link, 0.1);
 	}
 }
 
 .mobileCta {
-	margin-top: 16px;
 	padding-top: 16px;
-	border-top: 1px solid rgba(0, 0, 0, 0.05);
+	margin-top: 16px;
+	border-top: 1px solid rgba(0, 0, 0, 5%);
 }
 
 .mobileCtaButton {
+	justify-content: center;
 	width: 100%;
 	padding: 14px 24px;
 	font-size: 0.95rem;
 	font-weight: 600;
 	border-radius: 10px;
-	justify-content: center;
 }
 
 // Dark mode styles
 :global(.dark) .root {
-	background: rgba(15, 23, 42, 0.95);
-	border-bottom-color: rgba(255, 255, 255, 0.1);
+	background: rgba(15, 23, 42, 95%);
+	border-bottom-color: rgba(255, 255, 255, 10%);
 }
 
 :global(.dark) .brandName {
@@ -303,7 +314,7 @@
 
 :global(.dark) .darkModeWrapper {
 	background: #1e293b;
-	border-color: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 10%);
 
 	&:hover {
 		background: #334155;
@@ -320,7 +331,7 @@
 
 	&:hover {
 		color: #f1f5f9;
-		background: rgba(59, 130, 246, 0.1);
+		background: rgba(59, 130, 246, 10%);
 	}
 
 	&.active {
@@ -331,7 +342,7 @@
 
 :global(.dark) .mobileMenuButton {
 	background: #1e293b;
-	border-color: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 10%);
 
 	&:hover {
 		background: #334155;
@@ -339,37 +350,32 @@
 }
 
 :global(.dark) .hamburger.open span {
-
 	&:nth-child(1),
 	&:nth-child(3) {
 		background: $link;
 	}
 }
 
-:global(.dark) .hamburger span {
-	background: #94a3b8;
-}
-
 :global(.dark) .mobileMenu {
 	background: #1e293b;
-	border-color: rgba(255, 255, 255, 0.1);
-	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+	border-color: rgba(255, 255, 255, 10%);
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 40%);
 }
 
 :global(.dark) .mobileNavItem {
 	color: #94a3b8;
 
 	&:hover {
-		background: rgba($link, 0.1);
 		color: #f1f5f9;
+		background: rgba($link, 0.1);
 	}
 
 	&.active {
-		background: rgba($link, 0.15);
 		color: $link;
+		background: rgba($link, 0.15);
 	}
 }
 
 :global(.dark) .mobileCta {
-	border-top-color: rgba(255, 255, 255, 0.1);
+	border-top-color: rgba(255, 255, 255, 10%);
 }

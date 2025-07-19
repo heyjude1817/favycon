@@ -12,17 +12,13 @@ interface VideoPlayerProps {
 	className?: string
 }
 
-const defaultFallbackImages = [
-	'/images/unsplash-horizontal.jpg',
-	'/images/dnd-light.png',
-	'/images/dnd-dark.png'
-]
+const defaultFallbackImages = ['/images/unsplash-horizontal.jpg', '/images/dnd-light.png', '/images/dnd-dark.png']
 
 const VideoPlayer = ({
 	youtubeId,
 	localVideoSrc,
 	fallbackImages = defaultFallbackImages,
-	className
+	className,
 }: VideoPlayerProps) => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [showFallback, setShowFallback] = useState(false)
@@ -69,7 +65,7 @@ const VideoPlayer = ({
 				{youtubeId && isPlaying && (
 					<iframe
 						className={styles.iframe}
-						src={youtubeEmbedUrl}
+						src={youtubeEmbedUrl || undefined}
 						title="Favicon Generator Demo"
 						frameBorder="0"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -99,15 +95,10 @@ const VideoPlayer = ({
 								<div
 									key={index}
 									className={classnames(styles.imageSlide, {
-										[styles.active]: index === currentImageIndex
+										[styles.active]: index === currentImageIndex,
 									})}
 								>
-									<Image
-										src={image}
-										alt={`Demo screenshot ${index + 1}`}
-										fill
-										style={{ objectFit: 'cover' }}
-									/>
+									<Image src={image} alt={`Demo screenshot ${index + 1}`} fill style={{ objectFit: 'cover' }} />
 								</div>
 							))}
 						</div>
@@ -116,7 +107,7 @@ const VideoPlayer = ({
 								<button
 									key={index}
 									className={classnames(styles.dot, {
-										[styles.active]: index === currentImageIndex
+										[styles.active]: index === currentImageIndex,
 									})}
 									onClick={() => setCurrentImageIndex(index)}
 									aria-label={`Go to slide ${index + 1}`}
@@ -132,10 +123,7 @@ const VideoPlayer = ({
 						<div className={styles.playButton}>
 							<svg width="60" height="60" viewBox="0 0 60 60" fill="none">
 								<circle cx="30" cy="30" r="30" fill="rgba(0, 0, 0, 0.8)" />
-								<path
-									d="M23 20L23 40L40 30L23 20Z"
-									fill="white"
-								/>
+								<path d="M23 20L23 40L40 30L23 20Z" fill="white" />
 							</svg>
 						</div>
 						<Typography variant="regularBody" weight="medium" className={styles.playText}>
@@ -157,10 +145,7 @@ const VideoPlayer = ({
 							<div className={styles.playButton}>
 								<svg width="60" height="60" viewBox="0 0 60 60" fill="none">
 									<circle cx="30" cy="30" r="30" fill="rgba(0, 0, 0, 0.8)" />
-									<path
-										d="M23 20L23 40L40 30L23 20Z"
-										fill="white"
-									/>
+									<path d="M23 20L23 40L40 30L23 20Z" fill="white" />
 								</svg>
 							</div>
 							<Typography variant="regularBody" weight="medium" className={styles.playText}>

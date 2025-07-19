@@ -76,7 +76,8 @@ const FavyconInfo = ({
 			<div className={styles.bodyDesktop}>
 				<ToolTitle />
 				<Typography variant="largeBody" weight="medium" className={styles.firstParagraph}>
-					A small online tool to help you generate your favicon in all the sizes and formats you need.
+					The only favicon generator you need for your next project. Quick generate favicons from any image. Create all
+					sizes (16x16 to 512x512), formats (PNG, SVG, ICO) and get HTML code instantly. Free favicon maker tool.
 				</Typography>
 				<Typography variant="largeBody" weight="medium" className={styles.secondParagraph}>
 					Just drag &amp; drop an image and you will then get a downloadable file alongside some documentation on how to

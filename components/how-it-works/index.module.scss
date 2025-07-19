@@ -4,233 +4,257 @@
 
 .root {
 	padding: 100px 0;
-	background: #f8fafc;
+	background: $white;
 
-	@include breakpoint-md {
+	@include breakpoint-md-up {
 		padding: 140px 0;
 	}
 }
 
 .container {
 	max-width: 1200px;
-	margin: 0 auto;
 	padding: 0 20px;
+	margin: 0 auto;
 
-	@include breakpoint-md {
+	@include breakpoint-md-up {
 		padding: 0 40px;
 	}
 }
 
 .header {
-	text-align: center;
 	margin-bottom: 80px;
+	text-align: center;
 
-	@include breakpoint-md {
+	@include breakpoint-md-up {
 		margin-bottom: 100px;
 	}
 }
 
-.title {
-	color: $black;
-	margin: 0 0 16px 0;
-	font-size: 2.5rem;
+.badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 8px 16px;
+	margin-bottom: 24px;
+	background: rgba($link, 0.1);
+	border: 1px solid rgba($link, 0.2);
+	border-radius: 50px;
+	transition: all 0.3s ease;
 
-	@include breakpoint-md {
-		font-size: 3rem;
+	&:hover {
+		background: rgba($link, 0.15);
+		transform: translateY(-2px);
 	}
 }
 
-.subtitle {
-	color: $dark-grey;
+.badgeText {
 	margin: 0;
-	max-width: 600px;
-	margin-left: auto;
-	margin-right: auto;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: $link;
+}
 
-	@include breakpoint-md {
-		font-size: 1.25rem;
+.title {
+	margin: 0;
+	font-size: 2.5rem;
+	font-weight: 800;
+	color: #1a202c;
+	letter-spacing: -0.02em;
+
+	@include breakpoint-md-up {
+		font-size: 3.5rem;
 	}
 }
 
-.content {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 60px;
-	align-items: flex-start;
+.steps {
+	display: flex;
+	flex-direction: column;
+	gap: 80px;
+	max-width: 1000px;
+	margin: 0 auto;
 
-	@include breakpoint-md {
-		grid-template-columns: 1fr 1fr;
-		gap: 80px;
+	@include breakpoint-md-up {
+		gap: 100px;
 	}
-}
-
-.stepsSection {
-	order: 1;
-}
-
-.imageSection {
-	order: 2;
 }
 
 .step {
 	display: flex;
-	gap: 24px;
-	margin-bottom: 48px;
-	align-items: flex-start;
+	flex-direction: column;
+	gap: 32px;
 
-	&:last-child {
-		margin-bottom: 0;
+	@include breakpoint-md-up {
+		gap: 40px;
 	}
-
-	@include breakpoint-md {
-		gap: 32px;
-		margin-bottom: 60px;
-	}
-}
-
-.stepNumber {
-	flex-shrink: 0;
-	width: 60px;
-	height: 60px;
-	background: linear-gradient(135deg, $link 0%, color.scale($link, $lightness: 23%) 100%);
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 0 4px 20px rgba($link, 0.3);
-
-	@include breakpoint-md {
-		width: 70px;
-		height: 70px;
-	}
-}
-
-.number {
-	color: $white;
-	margin: 0;
-	font-size: 1.2rem;
-
-	@include breakpoint-md {
-		font-size: 1.4rem;
-	}
-}
-
-.stepContent {
-	flex: 1;
-	padding-top: 8px;
 }
 
 .stepHeader {
 	display: flex;
+	gap: 24px;
 	align-items: center;
-	gap: 12px;
-	margin-bottom: 12px;
+	margin-bottom: 24px;
+
+	@include breakpoint-md-up {
+		gap: 32px;
+		margin-bottom: 32px;
+	}
 }
 
-.stepIcon {
-	font-size: 1.5rem;
-}
-
-.stepTitle {
-	color: $black;
-	margin: 0;
+.stepNumber {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
+	height: 60px;
 	font-size: 1.25rem;
+	font-weight: 700;
+	background: linear-gradient(135deg, $link 0%, #8b5cf6 100%);
+	border-radius: 50%;
+	box-shadow: 0 4px 20px rgba($link, 0.3);
 
-	@include breakpoint-md {
+	@include breakpoint-md-up {
+		width: 70px;
+		height: 70px;
 		font-size: 1.5rem;
 	}
 }
 
-.stepDescription {
-	color: $dark-grey;
+.number {
 	margin: 0;
-	line-height: 1.6;
+	color: $white;
+}
+
+.stepTitleWrapper {
+	flex: 1;
+}
+
+.stepTitle {
+	margin: 0;
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #1a202c;
+
+	@include breakpoint-md-up {
+		font-size: 1.75rem;
+	}
+}
+
+.stepContent {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 40px;
+	align-items: center;
+
+	@include breakpoint-lg {
+		grid-template-columns: 1fr 1fr;
+		gap: 60px;
+	}
+}
+
+.stepText {
+	order: 1;
+
+	@include breakpoint-lg {
+		order: 0;
+	}
+}
+
+.stepDescription {
+	margin: 0;
+	font-size: 1rem;
+	line-height: 1.7;
+	color: #64748b;
+
+	@include breakpoint-md-up {
+		font-size: 1.125rem;
+	}
+}
+
+.stepImage {
+	order: 0;
+
+	@include breakpoint-lg {
+		order: 1;
+	}
 }
 
 .imageWrapper {
-	position: relative;
 	width: 100%;
 	aspect-ratio: 16 / 10;
-	border-radius: 20px;
 	overflow: hidden;
-	box-shadow: 0 12px 40px rgba($black, 0.15);
-	transition: all 0.3s ease;
+	border: 1px solid rgba(0, 0, 0, 5%);
+	border-radius: 16px;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 10%);
 
-	&:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 20px 60px rgba($black, 0.2);
+	@include breakpoint-md-up {
+		border-radius: 20px;
 	}
 }
 
-.image {
-	border-radius: 20px;
-}
-
-.imageOverlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba($black, 0.3);
+.imagePlaceholder {
 	display: flex;
+	flex-direction: column;
+	gap: 16px;
 	align-items: center;
 	justify-content: center;
-	opacity: 0;
-	transition: opacity 0.3s ease;
-	cursor: pointer;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+	border: 2px dashed rgba(0, 0, 0, 10%);
+}
 
-	&:hover {
-		opacity: 1;
+.placeholderIcon {
+	font-size: 3rem;
+	opacity: 0.6;
+
+	@include breakpoint-md-up {
+		font-size: 4rem;
 	}
 }
 
-.playButton {
-	transition: transform 0.2s ease;
-	margin-bottom: 12px;
-
-	&:hover {
-		transform: scale(1.1);
-	}
-}
-
-.playText {
-	color: $white;
-	text-shadow: 0 2px 4px rgba($black, 0.5);
+.placeholderText {
 	margin: 0;
+	color: #64748b;
+	text-align: center;
+	opacity: 0.8;
 }
-
-
 
 // Dark mode styles
 :global(.dark) .root {
-	background: $darker-black;
+	background: #0f172a;
+}
+
+:global(.dark) .badge {
+	background: rgba($link, 0.2);
+	border-color: rgba($link, 0.3);
+
+	&:hover {
+		background: rgba($link, 0.25);
+	}
 }
 
 :global(.dark) .title {
-	color: $off-white;
-}
-
-:global(.dark) .subtitle {
-	color: $light-grey;
-}
-
-:global(.dark) .stepNumber {
-	box-shadow: 0 4px 20px rgba($link, 0.4);
+	color: #f1f5f9;
 }
 
 :global(.dark) .stepTitle {
-	color: $off-white;
+	color: #f1f5f9;
 }
 
 :global(.dark) .stepDescription {
-	color: $light-grey;
+	color: #94a3b8;
 }
 
 :global(.dark) .imageWrapper {
-	box-shadow: 0 12px 40px rgba($black, 0.4);
+	border-color: rgba(255, 255, 255, 10%);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 40%);
+}
 
-	&:hover {
-		box-shadow: 0 20px 60px rgba($black, 0.5);
-	}
+:global(.dark) .imagePlaceholder {
+	background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+	border-color: rgba(255, 255, 255, 20%);
+}
+
+:global(.dark) .placeholderText {
+	color: #94a3b8;
 }

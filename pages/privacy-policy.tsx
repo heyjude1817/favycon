@@ -15,8 +15,9 @@ const PrivacyPolicyPage = ({}: PrivacyPolicyPageProps) => {
 	return (
 		<>
 			<SEO
-				title="Privacy Policy | Faviconify"
-				description="Learn how Faviconify protects your privacy. We don't collect personal data and process everything locally in your browser."
+				title="Privacy Policy - How Faviconify Protects Your Data | Faviconify"
+				description="Learn how Faviconify protects your privacy. We don't collect personal data and process everything locally in your browser. No tracking, no data storage, completely secure."
+				keywords="faviconify privacy policy, data protection, privacy, no tracking, secure favicon generator, browser processing"
 				url="https://faviconify.online/privacy-policy"
 			/>
 			<Header />

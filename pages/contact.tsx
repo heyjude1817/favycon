@@ -15,8 +15,9 @@ const ContactPage = ({}: ContactPageProps) => {
 	return (
 		<>
 			<SEO
-				title="Contact Us | Faviconify"
-				description="Get in touch with the Faviconify team. We're here to help with any questions about our favicon generation tools."
+				title="Contact Faviconify - Get Help with Favicon Generation | Faviconify"
+				description="Get in touch with the Faviconify team. We're here to help with any questions about our favicon generation tools, technical support, or feature requests."
+				keywords="contact faviconify, favicon help, favicon support, favicon generator support, technical help, favicon questions"
 				url="https://faviconify.online/contact"
 			/>
 			<Header />

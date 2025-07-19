@@ -15,8 +15,9 @@ const TermsOfServicePage = ({}: TermsOfServicePageProps) => {
 	return (
 		<>
 			<SEO
-				title="Terms of Service | Faviconify"
-				description="Read our terms of service for using Faviconify's free favicon generation and download tools."
+				title="Terms of Service - Faviconify Usage Guidelines | Faviconify"
+				description="Read our terms of service for using Faviconify's free favicon generation and download tools. Learn about usage rights, limitations, and guidelines."
+				keywords="faviconify terms of service, usage terms, favicon generator terms, service agreement, usage guidelines"
 				url="https://faviconify.online/terms-of-service"
 			/>
 			<Header />

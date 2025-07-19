@@ -1,2 +1,13 @@
 User-Agent: *
 Allow: /
+
+# Disallow API endpoints from crawling
+Disallow: /api/
+
+# Allow important static files
+Allow: /favicon.ico
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Sitemap location
+Sitemap: https://faviconify.online/sitemap.xml

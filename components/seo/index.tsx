@@ -17,7 +17,7 @@ const defaultProps = {
 	keywords:
 		'favicon generator, favicon maker, website icon, favicon creator, PWA icons, free favicon tool, convert image to favicon, favicon HTML code, multi-size favicon, online favicon generator',
 	url: 'https://faviconify.online',
-	image: 'https://faviconify.online/share.png?v5',
+	image: 'https://faviconify.online/share.png?v6',
 	type: 'website' as const,
 	siteName: 'Faviconify',
 	author: 'Faviconify Team',
@@ -75,6 +75,11 @@ const SEO = ({
 			<meta name="language" content="English" />
 			<meta name="revisit-after" content="7 days" />
 
+			{/* Additional Meta Tags */}
+			<meta name="theme-color" content="#3B82F6" />
+			<meta name="msapplication-TileColor" content="#3B82F6" />
+			<meta name="application-name" content={siteName} />
+
 			{/* Canonical URL */}
 			<link rel="canonical" href={url} />
 
@@ -105,10 +110,11 @@ const SEO = ({
 			<meta property="og:site_name" content={siteName} />
 			<meta property="og:url" content={url} />
 			<meta property="og:image" content={image} />
+			<meta property="og:image:secure_url" content={image} />
 			<meta property="og:image:type" content="image/png" />
 			<meta property="og:image:width" content="1200" />
 			<meta property="og:image:height" content="630" />
-			<meta property="og:image:alt" content={`${siteName} - ${description}`} />
+			<meta property="og:image:alt" content={`${siteName} - Professional favicon generator tool`} />
 			<meta property="og:locale" content="en_US" />
 			{publishedTime && <meta property="article:published_time" content={publishedTime} />}
 			{modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
@@ -118,9 +124,10 @@ const SEO = ({
 			<meta name="twitter:title" content={title} />
 			<meta name="twitter:description" content={description} />
 			<meta name="twitter:image" content={image} />
-			<meta name="twitter:image:alt" content={`${siteName} - ${description}`} />
+			<meta name="twitter:image:alt" content={`${siteName} - Professional favicon generator tool`} />
 			<meta name="twitter:creator" content="@faviconify" />
 			<meta name="twitter:site" content="@faviconify" />
+			<meta name="twitter:domain" content="faviconify.online" />
 
 			{/* Structured Data */}
 			<script

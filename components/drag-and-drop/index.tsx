@@ -9,6 +9,7 @@ import { CSSTransition } from 'react-transition-group'
 const CSSTransitionComponent = CSSTransition as any
 import { useDrag } from '@use-gesture/react'
 import splitbee from '@splitbee/web'
+import { analytics } from 'lib/analytics'
 import { headTemplate } from 'utils/favicon'
 import { isTouchCapable } from 'utils/device'
 import { Typography } from 'components/typography'
@@ -141,15 +142,20 @@ const DragAndDrop = ({ onFile, onGenerate, onError }: DragAndDropProps) => {
 			setIsLoading(true)
 			const zip = await onGenerate(file, pwa, darkMode)
 			setZipData(zip)
+
+			// Track with all analytics tools
 			splitbee.track('Favicon generated', {
 				type: file.type,
 				size: file.size,
 				pwa,
 				darkMode,
 			})
+			analytics.trackFaviconGeneration(true, file.type, { pwa, darkMode })
 		} catch (error: any) {
 			const message = (error.message as string) || 'Something went wrong. Please try again.'
 			onError(message)
+
+			// Track errors with all analytics tools
 			splitbee.track('Favicon error', {
 				type: file.type,
 				size: file.size,
@@ -157,6 +163,8 @@ const DragAndDrop = ({ onFile, onGenerate, onError }: DragAndDropProps) => {
 				darkMode,
 				message,
 			})
+			analytics.trackFaviconGeneration(false, file.type, { pwa, darkMode })
+			analytics.trackError('favicon_generation', message, 'drag_and_drop')
 		} finally {
 			setIsLoading(false)
 		}
@@ -164,7 +172,10 @@ const DragAndDrop = ({ onFile, onGenerate, onError }: DragAndDropProps) => {
 
 	const onDownload = (zipData: ArrayBuffer) => {
 		downloadFile(zipData, 'favicons.zip')
+
+		// Track downloads with all analytics tools
 		splitbee.track('Download Favicon')
+		analytics.trackDownload('favicon_zip')
 	}
 
 	const resetImage = () => {
@@ -186,11 +197,14 @@ const DragAndDrop = ({ onFile, onGenerate, onError }: DragAndDropProps) => {
 			onError('')
 			onFile(true)
 			setImage(file)
+
+			// Track file upload with all analytics tools
 			splitbee.track('Drop Accepted', {
 				...sizes,
 				type: file.type,
 				size: file.size,
 			})
+			analytics.trackFileUpload(file.type, file.size, sizes)
 		} else if (fileRejections.length) {
 			const file = fileRejections[0].file
 			let message = ''

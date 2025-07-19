@@ -10,6 +10,7 @@ import { FavyconError } from 'components/favycon-error'
 import { SEO } from 'components/seo'
 import { BreadcrumbSchema } from 'components/breadcrumb-schema'
 import { FAQSchema } from 'components/faq-schema'
+import { initAnalytics } from 'lib/analytics'
 // import { HeroSection } from 'components/hero-section'
 import { HowItWorks } from 'components/how-it-works'
 // import { FeaturesGrid } from 'components/features-grid'
@@ -59,7 +60,9 @@ const Home: NextPage = () => {
 	const [errorCounter, setErrorCounter] = useState(0)
 
 	useEffect(() => {
+		// Initialize all analytics tools
 		splitbee.init()
+		initAnalytics()
 	}, [])
 
 	useEffect(() => {

@@ -25,7 +25,7 @@ module.exports = {
 							},
 							{
 								key: 'Content-Security-Policy',
-								value: `default-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://hive.splitbee.io https://vitals.vercel-insights.com; script-src 'self' https://cdn.splitbee.io; font-src 'self'; frame-src 'self' https://www.youtube.com; frame-ancestors 'self'`,
+								value: `default-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://hive.splitbee.io https://vitals.vercel-insights.com https://www.google-analytics.com https://analytics.google.com https://analytics.umami.is; script-src 'self' https://cdn.splitbee.io https://www.googletagmanager.com https://analytics.umami.is; font-src 'self'; frame-src 'self' https://www.youtube.com; frame-ancestors 'self'`,
 							},
 						],
 					},

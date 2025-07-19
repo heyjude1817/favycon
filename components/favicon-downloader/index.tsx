@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { Typography } from 'components/typography'
 import { Button } from 'components/button'
 import { FaviconIcon, FaviconResponse } from 'pages/api/favicon-download/[domain]'
+import { analytics } from 'lib/analytics'
 
 import styles from './index.module.scss'
 
@@ -278,8 +279,16 @@ const FaviconDownloader = ({ className }: FaviconDownloaderProps) => {
 			}
 
 			setResult(data)
+
+			// Track successful favicon extraction
+			analytics.trackFaviconExtraction(domain.trim(), data.icons.length, true)
 		} catch (err) {
-			setError((err as Error).message || 'An error occurred while fetching favicons')
+			const errorMessage = (err as Error).message || 'An error occurred while fetching favicons'
+			setError(errorMessage)
+
+			// Track failed favicon extraction
+			analytics.trackFaviconExtraction(domain.trim(), 0, false)
+			analytics.trackError('favicon_extraction', errorMessage, 'favicon_downloader')
 		} finally {
 			setLoading(false)
 		}
@@ -303,6 +312,9 @@ const FaviconDownloader = ({ className }: FaviconDownloaderProps) => {
 			link.click()
 			document.body.removeChild(link)
 			window.URL.revokeObjectURL(url)
+
+			// Track individual favicon download
+			analytics.trackDownload('individual_favicon')
 		} catch (err) {
 			console.error('Error downloading favicon:', err)
 			// Fallback: open in new tab

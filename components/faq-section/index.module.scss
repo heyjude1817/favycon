@@ -12,8 +12,8 @@
 
 .container {
 	max-width: 800px;
-	margin: 0 auto;
 	padding: 0 20px;
+	margin: 0 auto;
 
 	@include breakpoint-md {
 		padding: 0 40px;
@@ -21,8 +21,8 @@
 }
 
 .header {
-	text-align: center;
 	margin-bottom: 60px;
+	text-align: center;
 
 	@include breakpoint-md {
 		margin-bottom: 80px;
@@ -30,9 +30,9 @@
 }
 
 .title {
-	color: $black;
-	margin: 0 0 16px 0;
+	margin: 0 0 16px;
 	font-size: 2.5rem;
+	color: $black;
 
 	@include breakpoint-md {
 		font-size: 3rem;
@@ -40,8 +40,8 @@
 }
 
 .subtitle {
-	color: $dark-grey;
 	margin: 0;
+	color: $dark-grey;
 
 	@include breakpoint-md {
 		font-size: 1.25rem;
@@ -55,10 +55,10 @@
 }
 
 .faqItem {
-	background: $white;
-	border-radius: 16px;
-	border: 1px solid rgba($light-grey, 0.5);
 	overflow: hidden;
+	background: $white;
+	border: 1px solid rgba($light-grey, 0.5);
+	border-radius: 16px;
 	transition: all 0.3s ease;
 
 	&:hover {
@@ -73,16 +73,16 @@
 }
 
 .faqQuestion {
-	width: 100%;
-	padding: 24px;
-	background: none;
-	border: none;
-	cursor: pointer;
 	display: flex;
+	gap: 20px;
 	align-items: center;
 	justify-content: space-between;
-	gap: 20px;
+	width: 100%;
+	padding: 24px;
 	text-align: left;
+	cursor: pointer;
+	background: none;
+	border: none;
 	transition: all 0.2s ease;
 
 	&:hover {
@@ -95,10 +95,10 @@
 }
 
 .questionText {
-	color: $black;
-	margin: 0;
 	flex: 1;
+	margin: 0;
 	font-size: 1.1rem;
+	color: $black;
 
 	@include breakpoint-md {
 		font-size: 1.25rem;
@@ -106,14 +106,14 @@
 }
 
 .toggleIcon {
-	flex-shrink: 0;
 	display: flex;
+	flex-shrink: 0;
 	align-items: center;
 	justify-content: center;
 	width: 32px;
 	height: 32px;
-	border-radius: 50%;
 	background: rgba($link, 0.1);
+	border-radius: 50%;
 	transition: all 0.2s ease;
 }
 
@@ -145,9 +145,9 @@
 }
 
 .answerText {
-	color: $dark-grey;
 	margin: 0;
 	line-height: 1.6;
+	color: $dark-grey;
 }
 
 // Dark mode styles

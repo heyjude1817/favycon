@@ -1,0 +1,281 @@
+@use '../../styles/variables' as *;
+@use '../../styles/breakpoints' as *;
+
+.root {
+	padding: 80px 0;
+	background: linear-gradient(135deg, #fafbfc 0%, #f8fafc 100%);
+
+	@include breakpoint-md-up {
+		padding: 120px 0;
+	}
+}
+
+.container {
+	max-width: 1200px;
+	padding: 0 20px;
+	margin: 0 auto;
+
+	@include breakpoint-md-up {
+		padding: 0 40px;
+	}
+}
+
+.header {
+	margin-bottom: 60px;
+	text-align: center;
+
+	@include breakpoint-md-up {
+		margin-bottom: 80px;
+	}
+}
+
+.title {
+	margin: 0 0 20px;
+	font-size: 2rem;
+	font-weight: 800;
+	color: #1a202c;
+	letter-spacing: -0.02em;
+
+	@include breakpoint-md-up {
+		margin-bottom: 24px;
+		font-size: 2.5rem;
+	}
+}
+
+.subtitle {
+	max-width: 700px;
+	margin: 0;
+	margin-right: auto;
+	margin-left: auto;
+	font-size: 1.125rem;
+	line-height: 1.6;
+	color: #64748b;
+
+	@include breakpoint-md-up {
+		font-size: 1.25rem;
+	}
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+
+	@include breakpoint-md-up {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 40px;
+	}
+}
+
+.useCaseCard {
+	position: relative;
+	padding: 32px 24px;
+	overflow: hidden;
+	background: $white;
+	border: 1px solid #e2e8f0;
+	border-radius: 20px;
+	transition: all 0.3s ease;
+
+	&::before {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		height: 4px;
+		content: '';
+		background: linear-gradient(90deg, $link 0%, #8b5cf6 100%);
+		transition: transform 0.3s ease;
+		transform: scaleX(0);
+	}
+
+	&:hover {
+		border-color: rgba($link, 0.3);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 10%);
+		transform: translateY(-6px);
+
+		&::before {
+			transform: scaleX(1);
+		}
+	}
+
+	@include breakpoint-md-up {
+		padding: 40px 32px;
+	}
+}
+
+.cardHeader {
+	display: flex;
+	gap: 20px;
+	align-items: flex-start;
+	margin-bottom: 24px;
+
+	@include breakpoint-md-up {
+		gap: 24px;
+		margin-bottom: 32px;
+	}
+}
+
+.iconContainer {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
+	height: 60px;
+	background: linear-gradient(135deg, rgba($link, 0.1) 0%, rgba(139, 92, 246, 10%) 100%);
+	border-radius: 16px;
+	transition: transform 0.3s ease;
+
+	@include breakpoint-md-up {
+		width: 72px;
+		height: 72px;
+	}
+}
+
+:global(.dark) .iconContainer {
+	background: linear-gradient(135deg, rgba($link, 0.2) 0%, rgba(139, 92, 246, 20%) 100%);
+}
+
+.useCaseCard:hover .iconContainer {
+	transform: scale(1.1);
+}
+
+.icon {
+	font-size: 1.75rem;
+	line-height: 1;
+
+	@include breakpoint-md-up {
+		font-size: 2rem;
+	}
+}
+
+.titleContainer {
+	flex: 1;
+}
+
+.useCaseTitle {
+	margin: 0 0 8px;
+	font-size: 1.25rem;
+	color: #1a202c;
+
+	@include breakpoint-md-up {
+		margin-bottom: 12px;
+		font-size: 1.375rem;
+	}
+}
+
+.useCaseDescription {
+	margin: 0;
+	font-size: 0.95rem;
+	line-height: 1.6;
+	color: #64748b;
+
+	@include breakpoint-md-up {
+		font-size: 1rem;
+	}
+}
+
+.examples {
+	padding-top: 20px;
+	border-top: 1px solid #e2e8f0;
+
+	@include breakpoint-md-up {
+		padding-top: 24px;
+	}
+}
+
+.examplesTitle {
+	margin: 0 0 12px;
+	font-size: 0.875rem;
+	color: #374151;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+
+	@include breakpoint-md-up {
+		margin-bottom: 16px;
+	}
+}
+
+.examplesList {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	@include breakpoint-md-up {
+		gap: 10px;
+	}
+}
+
+.exampleItem {
+	position: relative;
+	padding-left: 20px;
+
+	&::before {
+		position: absolute;
+		top: 0;
+		left: 0;
+		font-size: 1.2em;
+		font-weight: bold;
+		color: $link;
+		content: '•';
+	}
+}
+
+.exampleText {
+	margin: 0;
+	font-size: 0.875rem;
+	line-height: 1.5;
+	color: #64748b;
+
+	@include breakpoint-md-up {
+		font-size: 0.9rem;
+	}
+}
+
+// Dark mode styles
+:global(.dark) .root {
+	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+:global(.dark) .title {
+	color: #f1f5f9;
+}
+
+:global(.dark) .subtitle {
+	color: #94a3b8;
+}
+
+:global(.dark) .useCaseCard {
+	background: #1e293b;
+	border-color: rgba(255, 255, 255, 10%);
+
+	&:hover {
+		border-color: rgba($link, 0.5);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 30%);
+	}
+}
+
+
+
+:global(.dark) .useCaseTitle {
+	color: #f1f5f9;
+}
+
+:global(.dark) .useCaseDescription {
+	color: #94a3b8;
+}
+
+:global(.dark) .examples {
+	border-top-color: rgba(255, 255, 255, 10%);
+}
+
+:global(.dark) .examplesTitle {
+	color: #cbd5e1;
+}
+
+:global(.dark) .exampleText {
+	color: #94a3b8;
+}

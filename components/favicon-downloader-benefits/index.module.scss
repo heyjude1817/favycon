@@ -1,0 +1,251 @@
+@use '../../styles/variables' as *;
+@use '../../styles/breakpoints' as *;
+
+.root {
+	padding: 80px 0;
+	background: $white;
+
+	@include breakpoint-md-up {
+		padding: 120px 0;
+	}
+}
+
+.container {
+	max-width: 1200px;
+	padding: 0 20px;
+	margin: 0 auto;
+
+	@include breakpoint-md-up {
+		padding: 0 40px;
+	}
+}
+
+.header {
+	margin-bottom: 60px;
+	text-align: center;
+
+	@include breakpoint-md-up {
+		margin-bottom: 80px;
+	}
+}
+
+.title {
+	margin: 0 0 20px;
+	font-size: 2rem;
+	font-weight: 800;
+	color: #1a202c;
+	letter-spacing: -0.02em;
+
+	@include breakpoint-md-up {
+		margin-bottom: 24px;
+		font-size: 2.5rem;
+	}
+}
+
+.subtitle {
+	max-width: 700px;
+	margin: 0;
+	margin-right: auto;
+	margin-left: auto;
+	font-size: 1.125rem;
+	line-height: 1.6;
+	color: #64748b;
+
+	@include breakpoint-md-up {
+		font-size: 1.25rem;
+	}
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+	margin-bottom: 80px;
+
+	@include breakpoint-md-up {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 40px;
+		margin-bottom: 100px;
+	}
+}
+
+.benefitCard {
+	position: relative;
+	padding: 32px 24px;
+	overflow: hidden;
+	background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+	border: 1px solid #e2e8f0;
+	border-radius: 20px;
+	transition: all 0.3s ease;
+
+	&::before {
+		position: absolute;
+		inset: 0;
+		content: '';
+		background: linear-gradient(135deg, rgba($link, 0.05) 0%, rgba(139, 92, 246, 5%) 100%);
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	&:hover {
+		border-color: rgba($link, 0.3);
+		box-shadow: 0 15px 35px rgba(0, 0, 0, 10%);
+		transform: translateY(-4px);
+
+		&::before {
+			opacity: 1;
+		}
+	}
+
+	@include breakpoint-md-up {
+		padding: 40px 32px;
+	}
+}
+
+.statsContainer {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 120px;
+	height: 60px;
+	margin-bottom: 24px;
+	background: linear-gradient(135deg, $link 0%, #8b5cf6 100%);
+	border-radius: 12px;
+	transition: transform 0.3s ease;
+
+	@include breakpoint-md-up {
+		width: 140px;
+		height: 70px;
+		margin-bottom: 32px;
+	}
+}
+
+.benefitCard:hover .statsContainer {
+	transform: scale(1.05);
+}
+
+.stats {
+	margin: 0;
+	font-size: 0.875rem;
+	line-height: 1.2;
+	color: $white;
+	text-align: center;
+
+	@include breakpoint-md-up {
+		font-size: 1rem;
+	}
+}
+
+.content {
+	position: relative;
+	z-index: 1;
+}
+
+.benefitTitle {
+	margin: 0 0 16px;
+	font-size: 1.25rem;
+	color: #1a202c;
+
+	@include breakpoint-md-up {
+		margin-bottom: 20px;
+		font-size: 1.375rem;
+	}
+}
+
+.benefitDescription {
+	margin: 0;
+	font-size: 0.95rem;
+	line-height: 1.6;
+	color: #64748b;
+
+	@include breakpoint-md-up {
+		font-size: 1rem;
+	}
+}
+
+.cta {
+	padding: 60px 40px;
+	text-align: center;
+	background: linear-gradient(135deg, rgba($link, 0.1) 0%, rgba(139, 92, 246, 10%) 100%);
+	border: 1px solid rgba($link, 0.2);
+	border-radius: 24px;
+
+	@include breakpoint-md-up {
+		padding: 80px 60px;
+	}
+}
+
+.ctaTitle {
+	margin: 0 0 16px;
+	font-size: 1.5rem;
+	color: #1a202c;
+
+	@include breakpoint-md-up {
+		margin-bottom: 20px;
+		font-size: 1.75rem;
+	}
+}
+
+.ctaDescription {
+	max-width: 600px;
+	margin: 0;
+	margin-right: auto;
+	margin-left: auto;
+	font-size: 1rem;
+	line-height: 1.6;
+	color: #64748b;
+
+	@include breakpoint-md-up {
+		font-size: 1.125rem;
+	}
+}
+
+// Dark mode styles
+:global(.dark) .root {
+	background: #0f172a;
+}
+
+:global(.dark) .title {
+	color: #f1f5f9;
+}
+
+:global(.dark) .subtitle {
+	color: #94a3b8;
+}
+
+:global(.dark) .benefitCard {
+	background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+	border-color: rgba(255, 255, 255, 10%);
+
+	&::before {
+		background: linear-gradient(135deg, rgba($link, 0.1) 0%, rgba(139, 92, 246, 10%) 100%);
+	}
+
+	&:hover {
+		border-color: rgba($link, 0.5);
+		box-shadow: 0 15px 35px rgba(0, 0, 0, 30%);
+	}
+}
+
+:global(.dark) .benefitTitle {
+	color: #f1f5f9;
+}
+
+:global(.dark) .benefitDescription {
+	color: #94a3b8;
+}
+
+:global(.dark) .cta {
+	background: linear-gradient(135deg, rgba($link, 0.15) 0%, rgba(139, 92, 246, 15%) 100%);
+	border-color: rgba($link, 0.3);
+}
+
+:global(.dark) .ctaTitle {
+	color: #f1f5f9;
+}
+
+:global(.dark) .ctaDescription {
+	color: #94a3b8;
+}

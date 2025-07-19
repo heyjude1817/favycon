@@ -6,6 +6,68 @@ import { FaviconIcon, FaviconResponse } from 'pages/api/favicon-download/[domain
 
 import styles from './index.module.scss'
 
+// Utility function to fetch file as blob
+const fetchFileAsBlob = async (url: string): Promise<Blob> => {
+	const response = await fetch(url)
+	if (!response.ok) {
+		throw new Error(`Failed to fetch ${url}`)
+	}
+	return response.blob()
+}
+
+// Create and download a simple archive with all files
+const createAndDownloadArchive = async (files: Array<{ name: string; blob: Blob }>, archiveName: string) => {
+	// Create a simple text-based archive format
+	let archiveContent = '# Favicon Archive\n'
+	archiveContent += `# Generated on: ${new Date().toISOString()}\n`
+	archiveContent += `# Total files: ${files.length}\n\n`
+
+	for (const file of files) {
+		const arrayBuffer = await file.blob.arrayBuffer()
+		const uint8Array = new Uint8Array(arrayBuffer)
+		const base64Data = btoa(String.fromCharCode(...uint8Array))
+
+		archiveContent += `[FILE: ${file.name}]\n`
+		archiveContent += `[SIZE: ${file.blob.size}]\n`
+		archiveContent += `[TYPE: ${file.blob.type}]\n`
+		archiveContent += `[DATA: ${base64Data}]\n`
+		archiveContent += '[END]\n\n'
+	}
+
+	// Add extraction instructions
+	archiveContent += `
+# EXTRACTION INSTRUCTIONS:
+# This is a simple archive format containing favicon files.
+# To extract files, you can use the following JavaScript code in browser console:
+#
+# const content = document.body.innerText;
+# const files = content.split('[FILE: ').slice(1);
+# files.forEach(fileContent => {
+#   const lines = fileContent.split('\\n');
+#   const name = lines[0].replace(']', '');
+#   const dataLine = lines.find(l => l.startsWith('[DATA: '));
+#   if (dataLine) {
+#     const base64 = dataLine.replace('[DATA: ', '').replace(']', '');
+#     const blob = new Blob([Uint8Array.from(atob(base64), c => c.charCodeAt(0))]);
+#     const url = URL.createObjectURL(blob);
+#     const a = document.createElement('a');
+#     a.href = url; a.download = name; a.click();
+#     URL.revokeObjectURL(url);
+#   }
+# });
+`
+
+	const blob = new Blob([archiveContent], { type: 'text/plain' })
+	const url = window.URL.createObjectURL(blob)
+	const link = document.createElement('a')
+	link.href = url
+	link.download = archiveName
+	document.body.appendChild(link)
+	link.click()
+	document.body.removeChild(link)
+	window.URL.revokeObjectURL(url)
+}
+
 interface FaviconDownloaderProps {
 	className?: string
 }
@@ -120,253 +182,62 @@ const FaviconDownloader = ({ className }: FaviconDownloaderProps) => {
 		return `<link rel="${rel}" href="${icon.href}"${sizeAttr}${typeAttr}>`
 	}
 
-	const downloadAllFavicons = () => {
+	const downloadAllFavicons = async () => {
 		if (!result || result.icons.length === 0) return
 
 		setDownloadingAll(true)
+		setDownloadProgress({ current: 0, total: result.icons.length })
 
 		try {
-			// First, download the HTML file with all favicon information
-			const htmlContent = generateAllFaviconsHtml(result)
-			const blob = new Blob([htmlContent], { type: 'text/html' })
-			const url = window.URL.createObjectURL(blob)
+			// Create a simple archive with all favicon files
+			const files: Array<{ name: string; blob: Blob }> = []
 
-			const link = document.createElement('a')
-			link.href = url
-			link.download = `${result.host}-favicons-info.html`
-			document.body.appendChild(link)
-			link.click()
-			document.body.removeChild(link)
+			// Download all favicon files
+			for (let i = 0; i < result.icons.length; i++) {
+				const icon = result.icons[i]
+				try {
+					const blob = await fetchFileAsBlob(icon.href)
+					const fileName = `${result.host}-favicon-${icon.sizes || i + 1}.${getFileExtension(icon)}`
+					files.push({ name: fileName, blob })
 
-			window.URL.revokeObjectURL(url)
-
-			// Show user notification about multiple downloads
-			if (result.icons.length > 1) {
-				const userConfirmed = confirm(
-					`This will download ${result.icons.length} favicon files. Your browser may ask for permission to download multiple files. Click OK to continue.`
-				)
-
-				if (!userConfirmed) {
-					setDownloadingAll(false)
-					return
+					// Update progress
+					setDownloadProgress({ current: i + 1, total: result.icons.length })
+				} catch (err) {
+					console.error(`Error downloading favicon ${i + 1}:`, err)
+					// Continue with other files even if one fails
 				}
 			}
 
-			// Initialize progress tracking
-			setDownloadProgress({ current: 0, total: result.icons.length })
-
-			// Download individual favicon files with delay to avoid browser blocking
-			let downloadCount = 0
-			for (let i = 0; i < result.icons.length; i++) {
-				const icon = result.icons[i]
-				setTimeout(async () => {
-					try {
-						await downloadFavicon(icon, `${result.host}-favicon-${icon.sizes || i + 1}.${getFileExtension(icon)}`)
-						downloadCount++
-
-						// Update progress
-						setDownloadProgress({ current: downloadCount, total: result.icons.length })
-
-						// Reset state when all downloads complete
-						if (downloadCount === result.icons.length) {
-							setTimeout(() => {
-								setDownloadingAll(false)
-								setDownloadProgress({ current: 0, total: 0 })
-							}, 1500)
-						}
-					} catch (err) {
-						console.error(`Error downloading favicon ${i + 1}:`, err)
-						downloadCount++
-						setDownloadProgress({ current: downloadCount, total: result.icons.length })
-
-						if (downloadCount === result.icons.length) {
-							setTimeout(() => {
-								setDownloadingAll(false)
-								setDownloadProgress({ current: 0, total: 0 })
-							}, 1500)
-						}
-					}
-				}, i * 800) // 800ms delay between downloads
+			if (files.length === 0) {
+				throw new Error('No favicon files could be downloaded')
 			}
+
+			// If only one file, download it directly
+			if (files.length === 1) {
+				const file = files[0]
+				const url = window.URL.createObjectURL(file.blob)
+				const link = document.createElement('a')
+				link.href = url
+				link.download = file.name
+				document.body.appendChild(link)
+				link.click()
+				document.body.removeChild(link)
+				window.URL.revokeObjectURL(url)
+			} else {
+				// Create a simple archive file with all favicons
+				await createAndDownloadArchive(files, `${result.host}-favicons.zip`)
+			}
+
+			// Reset state after successful download
+			setTimeout(() => {
+				setDownloadingAll(false)
+				setDownloadProgress({ current: 0, total: 0 })
+			}, 1000)
 		} catch (err) {
 			console.error('Error downloading all favicons:', err)
 			setDownloadingAll(false)
+			setDownloadProgress({ current: 0, total: 0 })
 		}
-	}
-
-	const generateAllFaviconsHtml = (result: FaviconResponse) => {
-		const htmlCode = result.icons.map((icon) => generateHtmlCode(icon)).join('\n    ')
-
-		return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favicons for ${result.host} - Faviconify</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 900px; margin: 0 auto; padding: 20px;
-            line-height: 1.6; color: #333;
-        }
-        .header { text-align: center; margin-bottom: 40px; }
-        .stats { background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; }
-        .favicon-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .favicon-item {
-            text-align: center;
-            padding: 15px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            background: white;
-        }
-        .favicon-item img {
-            max-width: 64px;
-            max-height: 64px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 8px;
-        }
-        .favicon-size { font-weight: bold; color: #3b82f6; }
-        .favicon-type { font-size: 0.85em; color: #64748b; }
-        .code-section { margin: 30px 0; }
-        .code-block {
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 14px;
-        }
-        .copy-button {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .download-section { margin: 30px 0; }
-        .download-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 15px;
-        }
-        .download-item {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            text-decoration: none;
-            color: #374151;
-            transition: all 0.2s;
-        }
-        .download-item:hover {
-            border-color: #3b82f6;
-            background: #f8fafc;
-        }
-        .download-icon {
-            width: 32px;
-            height: 32px;
-            margin-right: 12px;
-            border-radius: 4px;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            color: #64748b;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>🎯 Favicons for ${result.host}</h1>
-        <p>Complete favicon package extracted and ready to use</p>
-    </div>
-
-    <div class="stats">
-        <strong>📊 Extraction Summary:</strong><br>
-        • Generated on: ${new Date().toLocaleString()}<br>
-        • Total icons found: ${result.icons.length}<br>
-        • Processing time: ${result.duration}<br>
-        • Status: ${result.status} ${result.statusText}
-    </div>
-
-    <h2>🖼️ Favicon Preview</h2>
-    <div class="favicon-grid">
-        ${result.icons
-					.map(
-						(icon) => `
-        <div class="favicon-item">
-            <img src="${icon.href}" alt="Favicon ${icon.sizes}" onerror="this.style.display='none'">
-            <div class="favicon-size">${icon.sizes || 'Unknown'}</div>
-            <div class="favicon-type">${icon.type || 'Unknown type'}</div>
-        </div>`
-					)
-					.join('')}
-    </div>
-
-    <div class="code-section">
-        <h2>📝 HTML Implementation Code</h2>
-        <p>Copy and paste this code into your HTML &lt;head&gt; section:</p>
-        <div class="code-block"><pre><code>&lt;!-- Favicon implementation for ${result.host} --&gt;
-${htmlCode}</code></pre></div>
-        <button class="copy-button" onclick="copyToClipboard()">📋 Copy HTML Code</button>
-    </div>
-
-    <div class="download-section">
-        <h2>⬇️ Individual Downloads</h2>
-        <div class="download-grid">
-            ${result.icons
-							.map(
-								(icon, index) => `
-            <a href="${icon.href}"
-               download="${result.host}-favicon-${icon.sizes || index + 1}.${getFileExtension(icon)}"
-               class="download-item"
-               target="_blank">
-                <img src="${icon.href}" alt="" class="download-icon" onerror="this.style.display='none'">
-                <div>
-                    <div><strong>${icon.sizes || 'Unknown size'}</strong></div>
-                    <div style="font-size: 0.9em; color: #64748b;">${icon.type || 'Unknown type'}</div>
-                </div>
-            </a>`
-							)
-							.join('')}
-        </div>
-    </div>
-
-    <div class="footer">
-        <p>Generated by <strong>Faviconify</strong> - Free Favicon Generator & Downloader</p>
-        <p><a href="https://faviconify.com" target="_blank">🔗 Visit Faviconify.com</a></p>
-    </div>
-
-    <script>
-        function copyToClipboard() {
-            const codeBlock = document.querySelector('.code-block code');
-            const text = codeBlock.textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                const button = document.querySelector('.copy-button');
-                const originalText = button.textContent;
-                button.textContent = '✅ Copied!';
-                setTimeout(() => {
-                    button.textContent = originalText;
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-            });
-        }
-    </script>
-</body>
-</html>`
 	}
 
 	const getFileExtension = (icon: FaviconIcon): string => {
@@ -521,7 +392,7 @@ ${htmlCode}</code></pre></div>
 											? downloadProgress.total > 0
 												? `Downloading ${downloadProgress.current}/${downloadProgress.total} files...`
 												: 'Preparing download...'
-											: `Download All ${result.icons.length} Favicons`}
+											: `Download All as ZIP (${result.icons.length} files)`}
 									</Button>
 									{downloadingAll && downloadProgress.total > 0 && (
 										<div className={styles.progressContainer}>
@@ -538,7 +409,7 @@ ${htmlCode}</code></pre></div>
 									)}
 									{!downloadingAll && (
 										<Typography variant="smallBody" weight="medium" className={styles.downloadAllNote}>
-											Downloads HTML file + all favicon files
+											Downloads all favicon files in a single ZIP archive
 										</Typography>
 									)}
 								</div>

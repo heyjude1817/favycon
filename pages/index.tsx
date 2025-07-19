@@ -10,6 +10,7 @@ import { FavyconError } from 'components/favycon-error'
 import { SEO } from 'components/seo'
 import { BreadcrumbSchema } from 'components/breadcrumb-schema'
 import { FAQSchema } from 'components/faq-schema'
+import { PageAnalytics } from 'components/page-analytics'
 import { initAnalytics } from 'lib/analytics'
 // import { HeroSection } from 'components/hero-section'
 import { HowItWorks } from 'components/how-it-works'
@@ -108,6 +109,9 @@ const Home: NextPage = () => {
 				description="Generate professional favicons from any image. Create all sizes (16x16 to 512x512), formats (PNG, SVG, ICO) and get HTML code instantly. Free favicon maker tool."
 				keywords="favicon generator, favicon maker, website icon, favicon creator, PWA icons, free favicon tool, convert image to favicon, favicon HTML code, multi-size favicon, online favicon generator"
 			/>
+
+			{/* Page-specific Analytics */}
+			<PageAnalytics title="Free Favicon Generator - Create Website Icons Online | Faviconify" path="/" />
 
 			{/* Structured Data */}
 			<BreadcrumbSchema items={breadcrumbData} />

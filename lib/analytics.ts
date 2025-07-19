@@ -25,22 +25,20 @@ export const ANALYTICS_CONFIG = {
 
 // Google Analytics functions
 export const gtag = (...args: unknown[]) => {
-	if (typeof window !== 'undefined' && window.gtag) {
+	if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		window.gtag(...(args as Parameters<typeof window.gtag>))
+	} else if (typeof window !== 'undefined' && (window as any).dataLayer) {
+		// Fallback: push directly to dataLayer if gtag not ready
+		;(window as any).dataLayer.push(args)
 	}
 }
 
 export const initGA = () => {
-	if (!ANALYTICS_CONFIG.ENABLE_GA || !ANALYTICS_CONFIG.GA_MEASUREMENT_ID) {
-		return
+	// GA is now initialized directly in the script tag via PageAnalytics component
+	if (process.env.NODE_ENV === 'development') {
+		console.log('Google Analytics initialization handled by direct script injection')
 	}
-
-	gtag('js', new Date())
-	gtag('config', ANALYTICS_CONFIG.GA_MEASUREMENT_ID, {
-		page_title: document.title,
-		page_location: window.location.href,
-	})
 }
 
 // Page view tracking
@@ -178,17 +176,21 @@ export const analytics = {
 
 // Initialize all analytics
 export const initAnalytics = () => {
-	// Initialize Google Analytics
-	if (ANALYTICS_CONFIG.ENABLE_GA) {
-		initGA()
+	if (process.env.NODE_ENV === 'development') {
+		console.log('Analytics are initialized directly via script tags:', {
+			GA: ANALYTICS_CONFIG.ENABLE_GA,
+			Umami: ANALYTICS_CONFIG.ENABLE_UMAMI,
+			Splitbee: ANALYTICS_CONFIG.ENABLE_SPLITBEE,
+		})
+
+		// Check if analytics are available after a short delay
+		setTimeout(() => {
+			const status = {
+				gtag: typeof window !== 'undefined' ? typeof window.gtag : 'undefined',
+				umami: typeof window !== 'undefined' ? typeof window.umami : 'undefined',
+				splitbee: typeof window !== 'undefined' ? typeof (window as any).splitbee : 'undefined',
+			}
+			console.log('Analytics availability check:', status)
+		}, 2000)
 	}
-
-	// Umami initializes automatically via script tag
-	// Splitbee initializes in the existing code
-
-	console.log('Analytics initialized:', {
-		GA: ANALYTICS_CONFIG.ENABLE_GA,
-		Umami: ANALYTICS_CONFIG.ENABLE_UMAMI,
-		Splitbee: ANALYTICS_CONFIG.ENABLE_SPLITBEE,
-	})
 }

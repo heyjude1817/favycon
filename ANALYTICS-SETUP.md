@@ -2,7 +2,7 @@
 
 ## 📊 Analytics Tools Integration
 
-Faviconify now supports multiple analytics platforms to provide comprehensive insights into user behavior and application performance.
+Faviconify supports multiple analytics platforms using direct script injection for maximum compatibility and reliability. This approach works even in restricted network environments.
 
 ### Supported Analytics Platforms
 

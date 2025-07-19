@@ -3,66 +3,373 @@
 
 .root {
 	padding: 0;
+	position: relative;
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .container {
-	height: 68px;
-	padding: 20px 20px 0;
+	height: 80px;
+	padding: 0 20px;
 	margin: 0 auto;
+	max-width: 1200px;
 
-	@include breakpoint-md {
-		height: 74px;
-		padding: 26px 26px 0;
+	@include breakpoint-md-up {
+		height: 88px;
+		padding: 0 40px;
 	}
 }
 
 .header {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: space-between;
 	height: 100%;
+	width: 100%;
+}
 
-	@include breakpoint-md {
-		justify-content: space-between;
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-shrink: 0;
+	cursor: pointer;
+	transition: all 0.2s ease;
+
+	&:hover {
+		opacity: 0.8;
 	}
 }
 
 .logo {
+	display: flex;
+	align-items: center;
+
+	svg {
+		width: 32px;
+		height: auto;
+
+		@include breakpoint-md-up {
+			width: 36px;
+		}
+	}
+}
+
+.brandName {
+	color: #1a202c;
+	margin: 0;
+	font-size: 1.25rem;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+
+	@include breakpoint-md-up {
+		font-size: 1.375rem;
+	}
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-shrink: 0;
+
+	@include breakpoint-md-up {
+		gap: 16px;
+	}
+}
+
+
+
+.darkModeWrapper {
+	background: #f8fafc;
+	border-radius: 8px;
+	transition: all 0.2s ease;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+
+	&:hover {
+		background: #f1f5f9;
+	}
+
+	@include breakpoint-md-up {
+		background: transparent;
+		border: none;
+	}
+}
+
+// Desktop Navigation
+.navigation {
+	display: none;
+	align-items: center;
+	gap: 16px;
+	flex: 1;
+	justify-content: center;
+
+	@include breakpoint-md-up {
+		display: flex;
+		gap: 24px;
+	}
+
+	@include breakpoint-lg {
+		gap: 32px;
+	}
+}
+
+
+
+.navItem {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 10px 16px;
+	border-radius: 8px;
+	transition: all 0.2s ease;
+	color: #64748b;
+	font-size: 0.9rem;
+	font-weight: 500;
+	position: relative;
+	white-space: nowrap;
+
+	&:hover {
+		color: #1a202c;
+		background: rgba(59, 130, 246, 0.05);
+	}
+
+	&.active {
+		color: $link;
+		background: rgba($link, 0.1);
+	}
+
+	@include breakpoint-md-up {
+		padding: 12px 18px;
+		font-size: 0.95rem;
+	}
+
+	@include breakpoint-lg {
+		padding: 12px 20px;
+		font-size: 1rem;
+	}
+}
+
+// Mobile Menu Button
+.mobileMenuButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f8fafc;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	cursor: pointer;
+	padding: 8px;
+	border-radius: 8px;
+	transition: all 0.2s ease;
+
+	&:hover {
+		background: #f1f5f9;
+	}
+
 	@include breakpoint-md-up {
 		display: none;
 	}
 }
 
-.item {
-	background: $off-white;
-	border-radius: 16px;
-	box-shadow: 0 0 10px rgba($off-white, 0.5);
-	transition: all 0.2s ease;
+.hamburger {
+	display: flex;
+	flex-direction: column;
+	width: 18px;
+	height: 14px;
+	position: relative;
 
-	@include breakpoint-md {
-		background: transparent;
-		box-shadow: none;
+	span {
+		display: block;
+		height: 2px;
+		width: 100%;
+		background: #64748b;
+		border-radius: 1px;
+		transition: all 0.3s ease;
+
+		&:nth-child(1) {
+			transform-origin: top left;
+		}
+
+		&:nth-child(2) {
+			margin: 4px 0;
+		}
+
+		&:nth-child(3) {
+			transform-origin: bottom left;
+		}
 	}
 
-	a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
+	&.open {
+		span {
+			&:nth-child(1) {
+				transform: rotate(45deg) translate(1px, -1px);
+				background: $link;
+			}
 
-	&:first-child {
-		svg {
-			width: 48px;
+			&:nth-child(2) {
+				opacity: 0;
+				transform: translateX(-10px);
+			}
+
+			&:nth-child(3) {
+				transform: rotate(-45deg) translate(1px, 1px);
+				background: $link;
+			}
 		}
 	}
 }
 
-:global(.dark) .item {
-	background: $darker-black;
-	box-shadow: 0 0 10px rgba($darker-black, 0.5);
+// Mobile Menu
+.mobileMenu {
+	position: absolute;
+	top: 100%;
+	left: 20px;
+	right: 20px;
+	background: $white;
+	border-radius: 16px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+	transform: translateY(-20px);
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+	z-index: 1000;
+	border: 1px solid rgba(0, 0, 0, 0.05);
 
-	@include breakpoint-md {
-		background: transparent;
-		box-shadow: none;
+	@include breakpoint-md-up {
+		display: none;
 	}
+
+	&.open {
+		transform: translateY(0);
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+.mobileNavigation {
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.mobileNavItem {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	border-radius: 10px;
+	transition: all 0.2s ease;
+	color: #64748b;
+	text-align: left;
+	font-weight: 500;
+
+	&:hover {
+		background: rgba($link, 0.05);
+		color: #1a202c;
+	}
+
+	&.active {
+		background: rgba($link, 0.1);
+		color: $link;
+	}
+}
+
+.mobileCta {
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mobileCtaButton {
+	width: 100%;
+	padding: 14px 24px;
+	font-size: 0.95rem;
+	font-weight: 600;
+	border-radius: 10px;
+	justify-content: center;
+}
+
+// Dark mode styles
+:global(.dark) .root {
+	background: rgba(15, 23, 42, 0.95);
+	border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .brandName {
+	color: #f1f5f9;
+}
+
+:global(.dark) .darkModeWrapper {
+	background: #1e293b;
+	border-color: rgba(255, 255, 255, 0.1);
+
+	&:hover {
+		background: #334155;
+	}
+
+	@include breakpoint-md-up {
+		background: transparent;
+		border: none;
+	}
+}
+
+:global(.dark) .navItem {
+	color: #94a3b8;
+
+	&:hover {
+		color: #f1f5f9;
+		background: rgba(59, 130, 246, 0.1);
+	}
+
+	&.active {
+		color: $link;
+		background: rgba($link, 0.15);
+	}
+}
+
+:global(.dark) .mobileMenuButton {
+	background: #1e293b;
+	border-color: rgba(255, 255, 255, 0.1);
+
+	&:hover {
+		background: #334155;
+	}
+}
+
+:global(.dark) .hamburger.open span {
+
+	&:nth-child(1),
+	&:nth-child(3) {
+		background: $link;
+	}
+}
+
+:global(.dark) .hamburger span {
+	background: #94a3b8;
+}
+
+:global(.dark) .mobileMenu {
+	background: #1e293b;
+	border-color: rgba(255, 255, 255, 0.1);
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+:global(.dark) .mobileNavItem {
+	color: #94a3b8;
+
+	&:hover {
+		background: rgba($link, 0.1);
+		color: #f1f5f9;
+	}
+
+	&.active {
+		background: rgba($link, 0.15);
+		color: $link;
+	}
+}
+
+:global(.dark) .mobileCta {
+	border-top-color: rgba(255, 255, 255, 0.1);
 }

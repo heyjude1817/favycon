@@ -1,0 +1,236 @@
+@use '../../styles/variables' as *;
+@use '../../styles/breakpoints' as *;
+@use 'sass:color';
+
+.root {
+	padding: 100px 0;
+	background: #f8fafc;
+
+	@include breakpoint-md {
+		padding: 140px 0;
+	}
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+
+	@include breakpoint-md {
+		padding: 0 40px;
+	}
+}
+
+.header {
+	text-align: center;
+	margin-bottom: 80px;
+
+	@include breakpoint-md {
+		margin-bottom: 100px;
+	}
+}
+
+.title {
+	color: $black;
+	margin: 0 0 16px 0;
+	font-size: 2.5rem;
+
+	@include breakpoint-md {
+		font-size: 3rem;
+	}
+}
+
+.subtitle {
+	color: $dark-grey;
+	margin: 0;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+
+	@include breakpoint-md {
+		font-size: 1.25rem;
+	}
+}
+
+.content {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 60px;
+	align-items: flex-start;
+
+	@include breakpoint-md {
+		grid-template-columns: 1fr 1fr;
+		gap: 80px;
+	}
+}
+
+.stepsSection {
+	order: 1;
+}
+
+.imageSection {
+	order: 2;
+}
+
+.step {
+	display: flex;
+	gap: 24px;
+	margin-bottom: 48px;
+	align-items: flex-start;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	@include breakpoint-md {
+		gap: 32px;
+		margin-bottom: 60px;
+	}
+}
+
+.stepNumber {
+	flex-shrink: 0;
+	width: 60px;
+	height: 60px;
+	background: linear-gradient(135deg, $link 0%, color.scale($link, $lightness: 23%) 100%);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 20px rgba($link, 0.3);
+
+	@include breakpoint-md {
+		width: 70px;
+		height: 70px;
+	}
+}
+
+.number {
+	color: $white;
+	margin: 0;
+	font-size: 1.2rem;
+
+	@include breakpoint-md {
+		font-size: 1.4rem;
+	}
+}
+
+.stepContent {
+	flex: 1;
+	padding-top: 8px;
+}
+
+.stepHeader {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.stepIcon {
+	font-size: 1.5rem;
+}
+
+.stepTitle {
+	color: $black;
+	margin: 0;
+	font-size: 1.25rem;
+
+	@include breakpoint-md {
+		font-size: 1.5rem;
+	}
+}
+
+.stepDescription {
+	color: $dark-grey;
+	margin: 0;
+	line-height: 1.6;
+}
+
+.imageWrapper {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 10;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 12px 40px rgba($black, 0.15);
+	transition: all 0.3s ease;
+
+	&:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 20px 60px rgba($black, 0.2);
+	}
+}
+
+.image {
+	border-radius: 20px;
+}
+
+.imageOverlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba($black, 0.3);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	cursor: pointer;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.playButton {
+	transition: transform 0.2s ease;
+	margin-bottom: 12px;
+
+	&:hover {
+		transform: scale(1.1);
+	}
+}
+
+.playText {
+	color: $white;
+	text-shadow: 0 2px 4px rgba($black, 0.5);
+	margin: 0;
+}
+
+
+
+// Dark mode styles
+:global(.dark) .root {
+	background: $darker-black;
+}
+
+:global(.dark) .title {
+	color: $off-white;
+}
+
+:global(.dark) .subtitle {
+	color: $light-grey;
+}
+
+:global(.dark) .stepNumber {
+	box-shadow: 0 4px 20px rgba($link, 0.4);
+}
+
+:global(.dark) .stepTitle {
+	color: $off-white;
+}
+
+:global(.dark) .stepDescription {
+	color: $light-grey;
+}
+
+:global(.dark) .imageWrapper {
+	box-shadow: 0 12px 40px rgba($black, 0.4);
+
+	&:hover {
+		box-shadow: 0 20px 60px rgba($black, 0.5);
+	}
+}

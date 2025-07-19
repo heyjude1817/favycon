@@ -8,6 +8,11 @@ import { FavyconInfo } from 'components/favycon-info'
 import { DragAndDrop } from 'components/drag-and-drop'
 import { FavyconError } from 'components/favycon-error'
 import { SEO } from 'components/seo'
+import { HeroSection } from 'components/hero-section'
+import { HowItWorks } from 'components/how-it-works'
+import { FeaturesGrid } from 'components/features-grid'
+import { FAQSection } from 'components/faq-section'
+import { Footer } from 'components/footer'
 
 import styles from './index.module.scss'
 
@@ -62,18 +67,36 @@ const Home: NextPage = () => {
 	return (
 		<BaseLayout>
 			<SEO
-				title="Faviconify - A favicon generator tool"
-				description="A small online tool to help you generate your favicon in all the sizes and formats you need."
+				title="Free Favicon Generator - Create Website Icons Online | Faviconify"
+				description="Generate professional favicons from any image. Create all sizes (16x16 to 512x512), formats (PNG, SVG, ICO) and get HTML code instantly. Free favicon maker tool."
+				keywords="favicon generator, favicon maker, website icon, favicon creator, PWA icons, free favicon tool, convert image to favicon, favicon HTML code, multi-size favicon, online favicon generator"
 			/>
+
+			{/* Hero Section */}
+			<HeroSection />
+
+			{/* Tool Section */}
 			<main className={styles.main}>
-				<div className={styles.container}>
+				<section id="tool" className={styles.container}>
 					<FavyconInfo className={styles.info} />
 					<FavyconWizard showDndImage={!file}>
 						<DragAndDrop key={fileCounter} onFile={setFile} onGenerate={onGenerate} onError={onError} />
 					</FavyconWizard>
-				</div>
+				</section>
 				<FavyconError key={errorCounter} error={error} clearError={() => setError('')} />
 			</main>
+
+			{/* How It Works Section */}
+			<HowItWorks />
+
+			{/* Features Section */}
+			<FeaturesGrid />
+
+			{/* FAQ Section */}
+			<FAQSection />
+
+			{/* Footer */}
+			<Footer />
 		</BaseLayout>
 	)
 }

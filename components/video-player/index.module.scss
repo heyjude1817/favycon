@@ -1,0 +1,207 @@
+@use '../../styles/variables' as *;
+@use '../../styles/breakpoints' as *;
+
+.root {
+	width: 100%;
+	max-width: 500px;
+}
+
+.videoContainer {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border-radius: 16px;
+	overflow: hidden;
+	background: $light-grey;
+	box-shadow: 0 8px 32px rgba($black, 0.1);
+	transition: all 0.3s ease;
+
+	&:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 40px rgba($black, 0.15);
+	}
+}
+
+.iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	border-radius: 16px;
+}
+
+.video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 16px;
+}
+
+.thumbnail {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.fallbackContainer {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: $off-white;
+}
+
+.imageCarousel {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.imageSlide {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+
+	&.active {
+		opacity: 1;
+	}
+}
+
+.carouselDots {
+	position: absolute;
+	bottom: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	gap: 8px;
+	z-index: 2;
+}
+
+.dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	border: none;
+	background: rgba($white, 0.5);
+	cursor: pointer;
+	transition: all 0.2s ease;
+
+	&.active {
+		background: $white;
+		transform: scale(1.2);
+	}
+
+	&:hover {
+		background: rgba($white, 0.8);
+	}
+}
+
+.playButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 12px;
+	transition: transform 0.2s ease;
+
+	svg {
+		filter: drop-shadow(0 4px 8px rgba($black, 0.3));
+	}
+}
+
+.playOverlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: rgba($black, 0.3);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	z-index: 1;
+
+	&:hover {
+		background: rgba($black, 0.4);
+
+		.playButton {
+			transform: scale(1.1);
+		}
+	}
+}
+
+.playText {
+	color: $white;
+	text-align: center;
+	text-shadow: 0 2px 4px rgba($black, 0.5);
+	margin: 0;
+}
+
+// Dark mode styles
+:global(.dark) .videoContainer {
+	background: $darker-grey;
+	box-shadow: 0 8px 32px rgba($black, 0.3);
+
+	&:hover {
+		box-shadow: 0 12px 40px rgba($black, 0.4);
+	}
+}
+
+:global(.dark) .fallbackContainer {
+	background: $darker-black;
+}
+
+:global(.dark) .dot {
+	background: rgba($light-grey, 0.5);
+
+	&.active {
+		background: $light-grey;
+	}
+
+	&:hover {
+		background: rgba($light-grey, 0.8);
+	}
+}
+
+// Responsive adjustments
+@include breakpoint-md {
+	.videoContainer {
+		border-radius: 20px;
+	}
+
+	.iframe,
+	.video {
+		border-radius: 20px;
+	}
+
+	.carouselDots {
+		bottom: 20px;
+	}
+
+	.dot {
+		width: 10px;
+		height: 10px;
+	}
+
+	.playButton {
+		margin-bottom: 16px;
+
+		svg {
+			width: 80px;
+			height: 80px;
+		}
+	}
+}

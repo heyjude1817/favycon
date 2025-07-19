@@ -1,0 +1,126 @@
+@use '../../styles/variables' as *;
+@use '../../styles/breakpoints' as *;
+
+.root {
+	background: $darker-black;
+	padding: 60px 0 40px;
+	border-top: 1px solid rgba($light-grey, 0.1);
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+
+	@include breakpoint-md {
+		padding: 0 40px;
+	}
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	margin-bottom: 40px;
+
+	@include breakpoint-md {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 60px;
+	}
+}
+
+.brand {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	max-width: 300px;
+}
+
+.logo {
+	svg {
+		width: 40px;
+		height: auto;
+	}
+}
+
+.description {
+	color: $light-grey;
+	margin: 0;
+	line-height: 1.5;
+}
+
+.links {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	@include breakpoint-md {
+		flex-direction: row;
+		gap: 32px;
+	}
+}
+
+.link {
+	color: $light-grey;
+	text-decoration: none;
+	transition: color 0.2s ease;
+
+	&:hover {
+		color: $off-white;
+	}
+
+	&:focus {
+		outline: 2px solid $link;
+		outline-offset: 2px;
+		border-radius: 4px;
+	}
+}
+
+.copyright {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding-top: 40px;
+	border-top: 1px solid rgba($light-grey, 0.1);
+	text-align: center;
+
+	@include breakpoint-md {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		text-align: left;
+	}
+}
+
+.copyrightText {
+	color: rgba($light-grey, 0.8);
+	margin: 0;
+}
+
+// Light mode styles (when not in dark mode)
+:global(:not(.dark)) .root {
+	background: $off-white;
+	border-top-color: rgba($dark-grey, 0.1);
+}
+
+:global(:not(.dark)) .description {
+	color: $dark-grey;
+}
+
+:global(:not(.dark)) .link {
+	color: $dark-grey;
+
+	&:hover {
+		color: $black;
+	}
+}
+
+:global(:not(.dark)) .copyright {
+	border-top-color: rgba($dark-grey, 0.1);
+}
+
+:global(:not(.dark)) .copyrightText {
+	color: rgba($dark-grey, 0.8);
+}

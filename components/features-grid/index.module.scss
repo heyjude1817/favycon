@@ -1,0 +1,225 @@
+@use '../../styles/variables' as *;
+@use '../../styles/breakpoints' as *;
+@use 'sass:color';
+
+.root {
+	padding: 100px 0;
+	background: $white;
+
+	@include breakpoint-md {
+		padding: 140px 0;
+	}
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+
+	@include breakpoint-md {
+		padding: 0 40px;
+	}
+}
+
+.header {
+	text-align: center;
+	margin-bottom: 80px;
+
+	@include breakpoint-md {
+		margin-bottom: 100px;
+	}
+}
+
+.title {
+	color: #1a202c;
+	margin: 0 0 20px 0;
+	font-size: 2.5rem;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+
+	@include breakpoint-md {
+		font-size: 3.5rem;
+		margin-bottom: 24px;
+	}
+}
+
+.subtitle {
+	color: #64748b;
+	margin: 0;
+	max-width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 1.125rem;
+	line-height: 1.6;
+
+	@include breakpoint-md {
+		font-size: 1.25rem;
+	}
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 40px;
+
+	@include breakpoint-md {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 50px;
+	}
+
+	@include breakpoint-lg {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 60px;
+	}
+}
+
+.feature {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	text-align: left;
+	padding: 32px 24px;
+	background: $white;
+	border-radius: 16px;
+	border: 1px solid #e2e8f0;
+	transition: all 0.3s ease;
+	height: 100%;
+
+	&:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+		border-color: rgba($link, 0.3);
+	}
+
+	&.highlighted {
+		border-color: $link;
+		background: linear-gradient(135deg, rgba($link, 0.02) 0%, rgba($link, 0.05) 100%);
+
+		&:hover {
+			box-shadow: 0 10px 40px rgba($link, 0.15);
+		}
+	}
+
+	@include breakpoint-md {
+		padding: 40px 32px;
+	}
+}
+
+.featureIcon {
+	width: 56px;
+	height: 56px;
+	background: rgba($link, 0.1);
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+	transition: all 0.3s ease;
+
+	@include breakpoint-md {
+		width: 64px;
+		height: 64px;
+		margin-bottom: 24px;
+	}
+}
+
+.highlighted .featureIcon {
+	background: rgba($link, 0.15);
+}
+
+.feature:hover .featureIcon {
+	background: rgba($link, 0.15);
+	transform: scale(1.05);
+}
+
+.icon {
+	font-size: 1.5rem;
+
+	@include breakpoint-md {
+		font-size: 1.75rem;
+	}
+}
+
+.featureContent {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.featureTitle {
+	color: #1a202c;
+	margin: 0 0 12px 0;
+	font-size: 1.125rem;
+	font-weight: 700;
+	line-height: 1.3;
+
+	@include breakpoint-md {
+		font-size: 1.25rem;
+		margin-bottom: 16px;
+	}
+}
+
+.featureDescription {
+	color: #64748b;
+	margin: 0;
+	line-height: 1.6;
+	flex: 1;
+	font-size: 0.95rem;
+
+	@include breakpoint-md {
+		font-size: 1rem;
+	}
+}
+
+// Dark mode styles
+:global(.dark) .root {
+	background: #0f172a;
+}
+
+:global(.dark) .title {
+	color: #f1f5f9;
+}
+
+:global(.dark) .subtitle {
+	color: #94a3b8;
+}
+
+:global(.dark) .feature {
+	background: #1e293b;
+	border-color: rgba(255, 255, 255, 0.1);
+
+	&:hover {
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+		border-color: rgba($link, 0.5);
+	}
+
+	&.highlighted {
+		background: linear-gradient(135deg, rgba($link, 0.05) 0%, rgba($link, 0.1) 100%);
+		border-color: rgba($link, 0.3);
+
+		&:hover {
+			box-shadow: 0 10px 40px rgba($link, 0.2);
+		}
+	}
+}
+
+:global(.dark) .feature:hover .featureIcon {
+	background: rgba($link, 0.3);
+}
+
+:global(.dark) .featureIcon {
+	background: rgba($link, 0.2);
+}
+
+:global(.dark) .highlighted .featureIcon {
+	background: rgba($link, 0.25);
+}
+
+:global(.dark) .featureTitle {
+	color: #f1f5f9;
+}
+
+:global(.dark) .featureDescription {
+	color: #94a3b8;
+}

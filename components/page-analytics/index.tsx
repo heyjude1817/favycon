@@ -1,17 +1,16 @@
-import Head from 'next/head'
+import Script from 'next/script'
 
 /**
  * PageAnalytics Component
  *
- * Provides page-level analytics injection using direct script tags.
- * This approach is more reliable than Next.js Script components in
- * environments with network restrictions or ad blockers.
+ * Provides page-level analytics injection using Next.js Script components.
+ * Uses the 'afterInteractive' strategy for optimal performance and reliability.
  *
  * Features:
  * - Google Analytics 4 with privacy settings
  * - Umami Analytics (privacy-focused)
  * - Splitbee Analytics (backward compatibility)
- * - Direct script injection for maximum compatibility
+ * - Next.js Script optimization for better loading performance
  */
 
 interface PageAnalyticsProps {
@@ -28,60 +27,38 @@ const PageAnalytics = ({ title, path }: PageAnalyticsProps) => {
 	const ENABLE_SPLITBEE = process.env.NEXT_PUBLIC_ENABLE_SPLITBEE !== 'false'
 
 	return (
-		<Head>
+		<>
 			{/* Google Analytics 4 */}
 			{ENABLE_GA && GA_ID && (
 				<>
-					<script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
-					<script
-						dangerouslySetInnerHTML={{
-							__html: `
-								window.dataLayer = window.dataLayer || [];
-								function gtag(){dataLayer.push(arguments);}
-								window.gtag = gtag;
-								gtag('js', new Date());
-								gtag('config', '${GA_ID}', {
-									page_title: '${title || document?.title || ''}',
-									page_location: window.location.href,
-									anonymize_ip: true,
-									allow_google_signals: false,
-									allow_ad_personalization_signals: false,
-								});
-								
-								// Track page view if path is provided
-								${path ? `gtag('config', '${GA_ID}', { page_path: '${path}' });` : ''}
-								
-								console.log('✅ Google Analytics loaded for page: ${title || 'Unknown'}');
-							`,
-						}}
-					/>
+					<Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+					<Script id="google-analytics" strategy="afterInteractive">
+						{`
+							window.dataLayer = window.dataLayer || [];
+							function gtag(){dataLayer.push(arguments);}
+							gtag('js', new Date());
+							gtag('config', '${GA_ID}');
+						`}
+					</Script>
 				</>
 			)}
 
 			{/* Umami Analytics */}
 			{ENABLE_UMAMI && UMAMI_ID && UMAMI_SRC && (
-				<script
-					async
-					src={UMAMI_SRC}
-					data-website-id={UMAMI_ID}
-					data-domains="faviconify.online"
-					onLoad={() => {
-						console.log('✅ Umami Analytics loaded for page:', title || 'Unknown')
-					}}
-				/>
+				<Script src={UMAMI_SRC} data-website-id={UMAMI_ID} strategy="afterInteractive" />
 			)}
 
 			{/* Splitbee Analytics */}
 			{ENABLE_SPLITBEE && (
-				<script
-					async
+				<Script
 					src="https://cdn.splitbee.io/sb.js"
+					strategy="afterInteractive"
 					onLoad={() => {
-						console.log('✅ Splitbee Analytics loaded for page:', title || 'Unknown')
+						console.log('✅ Splitbee Analytics loaded for page:', title || 'Unknown', path ? `at ${path}` : '')
 					}}
 				/>
 			)}
-		</Head>
+		</>
 	)
 }
 
